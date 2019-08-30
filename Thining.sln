@@ -3,9 +3,61 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{29A6F666-56FD-4C46-A592-D7FA91FB8D3E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WPF", "WPF", "{A9040A26-C8EE-4CAF-9EAF-626E007A6FB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thining.Common", "Core\Thining.Common\Thining.Common.csproj", "{6DD95FDC-2632-4823-89D0-DF7932E6F79A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thining.UI", "WPF\Thining.UI\Thining.UI.csproj", "{07453180-4038-457C-81BB-7017A2890660}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AF4B18A7-9FE0-4A9A-AAEE-C103A07D411A}"
+	ProjectSection(SolutionItems) = preProject
+		Settings.stylecop = Settings.stylecop
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thining.Infrastructure", "Core\Thining.Infrastructure\Thining.Infrastructure.csproj", "{19B5AECE-CCE3-4312-AB19-D190AF1A1441}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thining.Algorithm", "Core\Thining.Algorithm\Thining.Algorithm.csproj", "{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thining.Contracts", "WPF\Thining.Contracts\Thining.Contracts.csproj", "{A5976D58-40FE-4F20-B9E8-DE2F6C40C3BE}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6DD95FDC-2632-4823-89D0-DF7932E6F79A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6DD95FDC-2632-4823-89D0-DF7932E6F79A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6DD95FDC-2632-4823-89D0-DF7932E6F79A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6DD95FDC-2632-4823-89D0-DF7932E6F79A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07453180-4038-457C-81BB-7017A2890660}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07453180-4038-457C-81BB-7017A2890660}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07453180-4038-457C-81BB-7017A2890660}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07453180-4038-457C-81BB-7017A2890660}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19B5AECE-CCE3-4312-AB19-D190AF1A1441}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19B5AECE-CCE3-4312-AB19-D190AF1A1441}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19B5AECE-CCE3-4312-AB19-D190AF1A1441}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19B5AECE-CCE3-4312-AB19-D190AF1A1441}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5976D58-40FE-4F20-B9E8-DE2F6C40C3BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5976D58-40FE-4F20-B9E8-DE2F6C40C3BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5976D58-40FE-4F20-B9E8-DE2F6C40C3BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5976D58-40FE-4F20-B9E8-DE2F6C40C3BE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6DD95FDC-2632-4823-89D0-DF7932E6F79A} = {29A6F666-56FD-4C46-A592-D7FA91FB8D3E}
+		{07453180-4038-457C-81BB-7017A2890660} = {A9040A26-C8EE-4CAF-9EAF-626E007A6FB4}
+		{19B5AECE-CCE3-4312-AB19-D190AF1A1441} = {29A6F666-56FD-4C46-A592-D7FA91FB8D3E}
+		{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6} = {29A6F666-56FD-4C46-A592-D7FA91FB8D3E}
+		{A5976D58-40FE-4F20-B9E8-DE2F6C40C3BE} = {A9040A26-C8EE-4CAF-9EAF-626E007A6FB4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B6519B6-E0C0-41BB-99D5-EE459C3661B9}
