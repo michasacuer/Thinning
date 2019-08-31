@@ -5,14 +5,6 @@
 
     public class KMM : IAlgorithm
     {
-        private const byte Zero = byte.MaxValue;
-
-        private const byte One = byte.MinValue;
-
-        private const byte Two = 32;
-
-        private const byte Three = 64;
-
         private KMMConsts consts;
 
         public KMM()
@@ -36,17 +28,17 @@
                     {
                         int positionOfPixel = x + offset;
 
-                        if (pixels[positionOfPixel] == One)
+                        if (pixels[positionOfPixel] == Value.One)
                         {
-                            if (pixels[positionOfPixel + 1] == Zero || pixels[positionOfPixel - 1] == Zero ||
-                                pixels[positionOfPixel + stride] == Zero || pixels[positionOfPixel - stride] == Zero)
+                            if (pixels[positionOfPixel + 1] == Value.Zero || pixels[positionOfPixel - 1] == Value.Zero ||
+                                pixels[positionOfPixel + stride] == Value.Zero || pixels[positionOfPixel - stride] == Value.Zero)
                             {
-                                pixels[positionOfPixel] = Two;
+                                pixels[positionOfPixel] = Value.Two;
                             }
-                            else if (pixels[positionOfPixel - stride + 1] == Zero || pixels[positionOfPixel - stride - 1] == Zero ||
-                                     pixels[positionOfPixel + stride - 1] == Zero || pixels[positionOfPixel + stride - 1] == Zero)
+                            else if (pixels[positionOfPixel - stride + 1] == Value.Zero || pixels[positionOfPixel - stride - 1] == Value.Zero ||
+                                     pixels[positionOfPixel + stride - 1] == Value.Zero || pixels[positionOfPixel + stride - 1] == Value.Zero)
                             {
-                                pixels[positionOfPixel] = Three;
+                                pixels[positionOfPixel] = Value.Three;
                             }
                         }
                     }
@@ -60,7 +52,7 @@
                     {
                         int positionOfPixel = x + offset;
 
-                        if (pixels[positionOfPixel] == Two)
+                        if (pixels[positionOfPixel] == Value.Two)
                         {
                             int summary = 0;
 
@@ -78,7 +70,7 @@
 
                             for (int i = 0; i < stickPixels.Length; i++)
                             {
-                                if (stickPixels[i] != Zero)
+                                if (stickPixels[i] != Value.Zero)
                                 {
                                     summary += this.consts.CompareList[i];
                                 }
@@ -86,7 +78,7 @@
 
                             if (this.consts.DeleteList.Contains(summary))
                             {
-                                pixels[positionOfPixel] = Zero;
+                                pixels[positionOfPixel] = Value.Zero;
                                 deletion = true;
                             }
                         }
@@ -97,7 +89,7 @@
 
                 while (n <= 3)
                 {
-                    int value = n == 2 ? Two : Three;
+                    int value = n == 2 ? Value.Two : Value.Three;
 
                     Parallel.For(0, height, y =>
                     {
@@ -125,7 +117,7 @@
 
                                 for (int i = 0; i < stickPixels.Length; i++)
                                 {
-                                    if (stickPixels[i] != Zero)
+                                    if (stickPixels[i] != Value.Zero)
                                     {
                                         summary += this.consts.CompareList[i];
                                     }
@@ -133,12 +125,12 @@
 
                                 if (this.consts.DeleteList.Contains(summary))
                                 {
-                                    pixels[positionOfPixel] = Zero;
+                                    pixels[positionOfPixel] = Value.Zero;
                                     deletion = true;
                                 }
                                 else
                                 {
-                                    pixels[positionOfPixel] = Zero;
+                                    pixels[positionOfPixel] = Value.Zero;
                                 }
                             }
                         }
