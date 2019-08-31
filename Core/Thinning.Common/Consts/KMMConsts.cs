@@ -1,4 +1,4 @@
-﻿namespace Thining.Common.Consts
+﻿namespace Thinning.Common.Consts
 {
     using System.Collections.Generic;
 

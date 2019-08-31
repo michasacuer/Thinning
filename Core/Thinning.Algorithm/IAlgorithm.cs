@@ -1,4 +1,4 @@
-﻿namespace Thining.Algorithm
+﻿namespace Thinning.Algorithm
 {
     interface IAlgorithm
     {

@@ -1,8 +1,8 @@
-﻿namespace Thining.Algorithm
+﻿namespace Thinning.Algorithm
 {
     using System;
     using System.Threading.Tasks;
-    using Thining.Common.Consts;
+    using Thinning.Common.Consts;
 
     public class ZhangSuen : IAlgorithm
     {
