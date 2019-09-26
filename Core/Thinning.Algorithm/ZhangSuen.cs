@@ -3,8 +3,9 @@
     using System;
     using System.Threading.Tasks;
     using Thinning.Common.Consts;
+    using Thinning.Contracts.Interfaces;
 
-    public class ZhangSuen : IAlgorithm
+    public class ZhangSuen : IZhangSuen
     {
         public byte[] Execute(byte[] pixels, int stride, int height, int width)
         {

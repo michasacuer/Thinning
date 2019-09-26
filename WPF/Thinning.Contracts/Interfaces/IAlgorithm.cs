@@ -1,6 +1,6 @@
-﻿namespace Thinning.Algorithm
+﻿namespace Thinning.Contracts.Interfaces
 {
-    interface IAlgorithm
+    public interface IAlgorithm
     {
         byte[] Execute(byte[] pixels, int stride, int height, int width);
     }

@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Thining.UI
+namespace Thinning.UI.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindowView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindowView : Window
     {
-        public MainWindow()
+        public MainWindowView()
         {
             InitializeComponent();
         }

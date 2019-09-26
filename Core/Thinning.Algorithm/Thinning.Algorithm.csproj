@@ -43,7 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAlgorithm.cs" />
     <Compile Include="K3M.cs" />
     <Compile Include="KMM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -61,9 +60,13 @@
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\WPF\Thinning.Contracts\Thinning.Contracts.csproj">
+      <Project>{a5976d58-40fe-4f20-b9e8-de2f6c40c3be}</Project>
+      <Name>Thinning.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Thinning.Common\Thinning.Common.csproj">
       <Project>{6dd95fdc-2632-4823-89d0-df7932e6f79a}</Project>
-      <Name>Thining.Common</Name>
+      <Name>Thinning.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

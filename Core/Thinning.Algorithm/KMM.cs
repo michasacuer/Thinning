@@ -2,8 +2,9 @@
 {
     using System.Threading.Tasks;
     using Thinning.Common.Consts;
+    using Thinning.Contracts.Interfaces;
 
-    public class KMM : IAlgorithm
+    public class KMM : IKMM
     {
         private KMMConsts consts;
 

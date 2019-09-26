@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IAlgorithm.cs" />
+    <Compile Include="Interfaces\IKMM.cs" />
+    <Compile Include="Interfaces\IZhangSuen.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
