@@ -13,18 +13,18 @@
             var temp = new byte[pixels.Length];
             var result = new byte[pixels.Length];
 
+            Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
+
             while (deletion)
             {
-                Array.Copy(pixels, temp, pixels.Length);
-
                 deletion = false;
 
                 Parallel.For(0, height - 1, y =>
                 {
                     int offset = y * stride;
+
                     for (int x = 0; x < width - 1; x++)
                     {
-
                         int positionOfPixel = x + offset;
 
                         if (pixels[positionOfPixel] == Value.One)
@@ -58,19 +58,19 @@
                     }
                 });
 
+                Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
+
                 if (!deletion)
                 {
                     break;
                 }
 
-                Array.Copy(pixels, temp, pixels.Length);
-
                 Parallel.For(0, height - 1, y =>
                 {
                     int offset = y * stride;
+
                     for (int x = 0; x < width - 1; x++)
                     {
-
                         int positionOfPixel = x + offset;
 
                         if (pixels[positionOfPixel] == Value.One)
@@ -104,7 +104,7 @@
                     }
                 });
 
-                Array.Copy(pixels, temp, pixels.Length);
+                Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
             }
 
             return pixels;

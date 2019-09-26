@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts\K3MConsts.cs" />
     <Compile Include="Consts\KMMConsts.cs" />
     <Compile Include="Consts\PixelValues.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

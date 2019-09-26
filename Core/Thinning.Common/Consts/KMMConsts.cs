@@ -25,7 +25,8 @@
 
         public static readonly HashSet<int> DeleteFourList = new HashSet<int>()
         {
-            3, 6, 12, 24, 48, 96, 192, 129, 7, 14, 28, 56, 112, 224, 193, 131, 15, 30, 60, 120, 240, 225, 195, 135,
+            3, 6, 12, 24, 48, 96, 192, 129, 7, 14, 28, 56, 112,
+            224, 193, 131, 15, 30, 60, 120, 240, 225, 195, 135,
         };
 
         public readonly int[] CompareList = new int[8]
