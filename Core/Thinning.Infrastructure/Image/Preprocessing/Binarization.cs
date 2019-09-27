@@ -8,7 +8,7 @@
     {
         public Bitmap Execute(Bitmap resultBmp)
         {
-            int threshold = this.OtsuValue(resultBmp);
+            int threshold = this.CalculateOtsuValue(resultBmp);
 
             int pixelBPP = Image.GetPixelFormatSize(resultBmp.PixelFormat) / 8;
 
@@ -45,7 +45,7 @@
             return resultBmp;
         }
 
-        private int OtsuValue(Bitmap tempBmp)
+        private int CalculateOtsuValue(Bitmap tempBmp)
         {
             int x;
             int y;

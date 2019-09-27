@@ -6,6 +6,8 @@
     using Caliburn.Micro;
     using Thinning.Algorithm;
     using Thinning.Contracts.Interfaces;
+    using Thinning.UI.Helpers;
+    using Thinning.UI.Helpers.Interfaces;
     using Thinning.UI.ViewModels;
 
     public class Bootstrapper : BootstrapperBase
@@ -28,9 +30,11 @@
             this.simpleContainer.Singleton<IEventAggregator, EventAggregator>();
 
             this.simpleContainer.PerRequest<MainWindowViewModel, MainWindowViewModel>();
+            this.simpleContainer.PerRequest<PerformanceChartViewModel, PerformanceChartViewModel>();
 
             this.simpleContainer.PerRequest<IKMM, KMM>();
             this.simpleContainer.PerRequest<IZhangSuen, ZhangSuen>();
+            this.simpleContainer.PerRequest<ICardContent, CardContent>();
 
             base.Configure();
         }
