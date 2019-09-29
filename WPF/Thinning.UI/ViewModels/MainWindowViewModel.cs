@@ -1,25 +1,19 @@
 ﻿namespace Thinning.UI.ViewModels
 {
+    using System.Windows.Media;
     using Caliburn.Micro;
-    using Thinning.Contracts.Interfaces;
+    using Thinning.Infrastructure.Image.Preprocessing;
     using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
 
     public class MainWindowViewModel : Conductor<IScreen>.Collection.AllActive
     {
-        private IKMM kMM;
-
-        private IZhangSuen zhangSuen;
-
         private ICardContent cardContent;
 
-        public MainWindowViewModel(IKMM kMM, IZhangSuen zhangSuen, ICardContent cardContent)
+        public MainWindowViewModel(ICardContent cardContent)
         {
-            this.kMM = kMM;
-            this.zhangSuen = zhangSuen;
             this.cardContent = cardContent;
 
-            this.Items.Add(new PerformanceChartViewModel { DisplayName = "K3M" });
             this.Items.Add(new PerformanceChartViewModel { DisplayName = "KMM" });
             this.Items.Add(new PerformanceChartViewModel { DisplayName = "Zhang Suen" });
 
@@ -28,6 +22,10 @@
         }
 
         public string BaseImageUrl { get; set; }
+
+        public ImageSource KMMAlgorithmResult { get; set; }
+
+        public ImageSource ZhangSuenAlgorithmResult { get; set; }
 
         public string HardwareInfo { get; set; }
 
@@ -44,6 +42,22 @@
             this.NotifyOfPropertyChange(() => this.ImageInfo);
         }
 
-        public void RunAlghoritms() => throw new System.NotImplementedException();
+        public void RunAlgorithms()
+        {
+            var algorithmTest = new AlgorithmTest();
+            var testResult = algorithmTest.Execute(this.BaseImageUrl);
+
+            var conversion = new Conversion();
+
+            this.KMMAlgorithmResult = conversion.BitmapToBitmapImage(testResult.KMMBitmapResult);
+            this.NotifyOfPropertyChange(() => this.KMMAlgorithmResult);
+
+            this.ZhangSuenAlgorithmResult = conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult);
+            this.NotifyOfPropertyChange(() => this.ZhangSuenAlgorithmResult);
+
+            this.Items[0] = new PerformanceChartViewModel(testResult.KMMResultTimes, "KMM");
+            this.Items[1] = new PerformanceChartViewModel(testResult.ZhangSuenResultTimes, "Zhang Suen");
+            this.NotifyOfPropertyChange(() => this.Items);
+        }
     }
 }

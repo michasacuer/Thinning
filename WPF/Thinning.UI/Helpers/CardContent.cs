@@ -10,13 +10,19 @@
     {
         public string GetImageInfo(string imageFilepath)
         {
-            string imageInfo = string.Empty;
+            try
+            {
+                var image = Image.FromFile(imageFilepath);
+                string filename = Path.GetFileName(imageFilepath);
+                string imageInfo = "Image name: " + filename + Environment.NewLine +
+                    "Width (px): " + image.Width + " Height (px): " + image.Height;
 
-            var image = Image.FromFile(imageFilepath);
-            string filename = Path.GetFileName(imageFilepath);
-            imageInfo = "Image name: " + filename + Environment.NewLine + "Width (px): " + image.Width + " Height (px): " + image.Height;
-
-            return imageInfo;
+                return imageInfo;
+            }
+            catch (ArgumentException)
+            {
+                return string.Empty;
+            }
         }
 
         public string GetHardwareInfo()

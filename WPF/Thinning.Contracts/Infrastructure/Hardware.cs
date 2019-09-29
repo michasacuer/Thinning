@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     using Thinning.Infrastructure.Computer;
 
     public class Hardware
@@ -9,7 +10,6 @@
         public string GetHardwareInfo()
         {
             var systemInfo = new SystemInfo();
-            string hardwareInfo = string.Empty;
             var hardwareInfoList = new List<string>();
 
             hardwareInfoList.Add("OS: " + systemInfo.GetOperativeSystemInfo());
@@ -17,13 +17,14 @@
             hardwareInfoList.Add("GPU: " + systemInfo.GetGpuInfo());
             hardwareInfoList.Add("MEM: " + systemInfo.GetTotalMemory());
 
+            var sb = new StringBuilder();
+
             foreach (string info in hardwareInfoList)
             {
-                hardwareInfo += info;
-                hardwareInfo += Environment.NewLine;
+                sb.Append(info + Environment.NewLine);
             }
 
-            return hardwareInfo;
+            return sb.ToString();
         }
     }
 }

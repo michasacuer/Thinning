@@ -1,6 +1,7 @@
 ﻿namespace Thinning.UI.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using Caliburn.Micro;
     using LiveCharts;
     using LiveCharts.Wpf;
@@ -9,24 +10,38 @@
     {
         public PerformanceChartViewModel()
         {
-            SeriesCollection = new SeriesCollection
+        }
+
+        public PerformanceChartViewModel(List<double> values, string displayName)
+        {
+            this.DisplayName = displayName;
+
+            var testValues = new ChartValues<double>(values);
+
+            this.SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
-                    Title = "2015",
-                    Values = new ChartValues<double> { 10, 50, 39, 50 }
-                }
+                    Title = "Execute time (Ms)",
+                    Values = testValues,
+                },
             };
 
-            //also adding values updates and animates the chart automatically
-            SeriesCollection[0].Values.Add(48d);
+            var labels = new string[10];
 
-            Labels = new[] { "Maria", "Susan", "Charles", "Frida" };
-            Formatter = value => value.ToString("N");
+            for (int i = 0; i < 10; i++)
+            {
+                labels[i] = $"Run {i + 1}";
+            }
+
+            this.Labels = labels;
+            this.Formatter = value => value.ToString("N");
         }
 
         public SeriesCollection SeriesCollection { get; set; }
+
         public string[] Labels { get; set; }
+
         public Func<double, string> Formatter { get; set; }
     }
 }

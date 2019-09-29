@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Thinning.Common.Consts;
-    using Thinning.Contracts.Interfaces;
+    using Thinning.Infrastructure.Interfaces;
 
     public class ZhangSuen : IZhangSuen
     {
