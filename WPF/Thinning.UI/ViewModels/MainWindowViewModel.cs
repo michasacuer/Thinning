@@ -10,9 +10,12 @@
     {
         private ICardContent cardContent;
 
-        public MainWindowViewModel(ICardContent cardContent)
+        private IWindowManager windowManager;
+
+        public MainWindowViewModel(ICardContent cardContent, IWindowManager windowManager)
         {
             this.cardContent = cardContent;
+            this.windowManager = windowManager;
 
             this.Items.Add(new PerformanceChartViewModel { DisplayName = "KMM" });
             this.Items.Add(new PerformanceChartViewModel { DisplayName = "Zhang Suen" });
@@ -49,8 +52,11 @@
             this.IsButtonsEnabled = false;
             this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
 
+            var progressViewModel = new ProgressViewModel();
+            await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
+
             var algorithmTest = new AlgorithmTest();
-            var testResult = await algorithmTest.ExecuteAsync(this.BaseImageUrl);
+            var testResult = await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
 
             var conversion = new Conversion();
 

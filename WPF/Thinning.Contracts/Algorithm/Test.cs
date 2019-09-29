@@ -1,10 +1,12 @@
 ﻿namespace Thinning.Contracts.Algorithm
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.Runtime.InteropServices;
+    using System.Threading;
     using Thinning.Infrastructure.Image.Preprocessing;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
@@ -21,7 +23,7 @@
             this.zhangSuen = zhangSuen;
         }
 
-        public TestResult Run(string imageFilepath)
+        public TestResult Run(string imageFilepath, IProgress<int> progress)
         {
             var bitmap = new Bitmap(imageFilepath);
 
@@ -50,6 +52,7 @@
             var kMMResultTimes = new List<double>();
             var zhangSuenResultTimes = new List<double>();
             int sample = 0;
+            int progressValue = 1;
 
             for (int i = 0; i < 10; i++)
             {
@@ -61,6 +64,7 @@
 
                 stopwatch.Reset();
                 sample++;
+                progress.Report(progressValue += 4);
             }
 
             for (int i = 0; i < 10; i++)
@@ -73,6 +77,7 @@
 
                 stopwatch.Reset();
                 sample++;
+                progress.Report(progressValue += 4);
             }
 
             bitmap.UnlockBits(bmpData);
@@ -96,6 +101,8 @@
             Marshal.Copy(researchSamples[10], 0, zhangSuenBmpData.Scan0, researchSamples[10].Length);
             zhangSuenResultBitmap.UnlockBits(zhangSuenBmpData);
 
+            progress.Report(progressValue += 50);
+
             return new TestResult
             {
                 KMMBitmapResult = kMMResultBitmap,
@@ -108,6 +115,8 @@
         private Bitmap PrepareBitmapToTestRun(Bitmap bitmap)
         {
             var conversion = new Conversion();
+
+            Thread.Sleep(500);
 
             bitmap = conversion.CreateNonIndexedImage(bitmap);
             bitmap = conversion.Binarize(bitmap);

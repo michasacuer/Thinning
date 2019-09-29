@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Thinning.UI.Views"
         mc:Ignorable="d"
-        Title="ProgressWindow" Height="200" Width="400">
+        Title="Progress" Height="200" Width="400">
     <Grid Margin="80">
-        <ProgressBar Minimum="0" Maximum="100" Value="75" />
+        <ProgressBar Minimum="0" Maximum="100" Value="{Binding ProgressValue}" Height="Auto" Margin="0,0,0.333,-14.333" />
     </Grid>
 </Window>
