@@ -1,5 +1,6 @@
 ﻿namespace Thinning.UI.Helpers
 {
+    using System.Threading.Tasks;
     using Autofac;
     using Thinning.Contracts;
     using Thinning.Infrastructure.Interfaces;
@@ -7,7 +8,7 @@
 
     public class AlgorithmTest
     {
-        public TestResult Execute(string imageFilepath)
+        public async Task<TestResult> ExecuteAsync(string imageFilepath)
         {
             var container = ContainerConfig.Configure();
             var testResult = new TestResult();
@@ -15,7 +16,7 @@
             using (var scope = container.BeginLifetimeScope())
             {
                 var test = scope.Resolve<ITest>();
-                testResult =     test.Run(imageFilepath);
+                testResult = await Task.Run(() => test.Run(imageFilepath));
             }
 
             return testResult;

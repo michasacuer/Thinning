@@ -27,6 +27,8 @@
 
         public ImageSource ZhangSuenAlgorithmResult { get; set; }
 
+        public bool IsButtonsEnabled { get; set; } = true;
+
         public string HardwareInfo { get; set; }
 
         public string ImageInfo { get; set; }
@@ -42,10 +44,13 @@
             this.NotifyOfPropertyChange(() => this.ImageInfo);
         }
 
-        public void RunAlgorithms()
+        public async void RunAlgorithms()
         {
+            this.IsButtonsEnabled = false;
+            this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
+
             var algorithmTest = new AlgorithmTest();
-            var testResult = algorithmTest.Execute(this.BaseImageUrl);
+            var testResult = await algorithmTest.ExecuteAsync(this.BaseImageUrl);
 
             var conversion = new Conversion();
 
@@ -58,6 +63,9 @@
             this.Items[0] = new PerformanceChartViewModel(testResult.KMMResultTimes, "KMM");
             this.Items[1] = new PerformanceChartViewModel(testResult.ZhangSuenResultTimes, "Zhang Suen");
             this.NotifyOfPropertyChange(() => this.Items);
+
+            this.IsButtonsEnabled = true;
+            this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
         }
     }
 }
