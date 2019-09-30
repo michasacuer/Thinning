@@ -23,7 +23,7 @@
             247, 248, 249, 251, 252, 253, 254, 255,
         };
 
-        public static readonly HashSet<int> DeleteFourList = new HashSet<int>()
+        public readonly HashSet<int> DeleteFourList = new HashSet<int>()
         {
             3, 6, 12, 24, 48, 96, 192, 129, 7, 14, 28, 56, 112,
             224, 193, 131, 15, 30, 60, 120, 240, 225, 195, 135,

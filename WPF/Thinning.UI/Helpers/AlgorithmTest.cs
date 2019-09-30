@@ -21,8 +21,22 @@
 
                 IProgress<int> progress = new Progress<int>((i) =>
                 {
+                    if (i <= 20)
+                    {
+                        progressViewModel.TaskInfo = "K3M Executing";
+                    }
+                    else if (i > 20 && i < 40)
+                    {
+                        progressViewModel.TaskInfo = "KMM Executing";
+                    }
+                    else
+                    {
+                        progressViewModel.TaskInfo = "ZhangSuen Executing";
+                    }
+
                     progressViewModel.ProgressValue = i;
                     progressViewModel.NotifyOfPropertyChange(() => progressViewModel.ProgressValue);
+                    progressViewModel.NotifyOfPropertyChange(() => progressViewModel.TaskInfo);
                 });
 
                 testResult = await Task.Run(() => test.Run(imageFilepath, progress));

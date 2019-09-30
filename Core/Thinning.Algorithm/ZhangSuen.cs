@@ -20,11 +20,11 @@
             {
                 deletion = false;
 
-                Parallel.For(0, height - 1, y =>
+                Parallel.For(1, height - 1, y =>
                 {
                     int offset = y * stride;
 
-                    for (int x = 0; x < width - 1; x++)
+                    for (int x = 1; x < width - 1; x++)
                     {
                         int positionOfPixel = x + offset;
 
@@ -66,11 +66,11 @@
                     break;
                 }
 
-                Parallel.For(0, height - 1, y =>
+                Parallel.For(1, height - 1, y =>
                 {
                     int offset = y * stride;
 
-                    for (int x = 0; x < width - 1; x++)
+                    for (int x = 1; x < width - 1; x++)
                     {
                         int positionOfPixel = x + offset;
 

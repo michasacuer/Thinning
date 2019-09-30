@@ -12,8 +12,10 @@
             var builder = new ContainerBuilder();
 
             builder.RegisterType<Test>().As<ITest>();
+
             builder.RegisterType<KMM>().As<IKMM>();
             builder.RegisterType<ZhangSuen>().As<IZhangSuen>();
+            builder.RegisterType<K3M>().As<IK3M>();
 
             return builder.Build();
         }

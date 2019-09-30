@@ -61,7 +61,7 @@
         <Image Height="180" Width="180" Source="{Binding ZhangSuenAlgorithmResult}" Grid.Column="3" />
 
         <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="LoadImage" Grid.Row="3" Width="150" Content="Load image" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"></Button>
-        <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="RunAlgorithms" Grid.Row="3" Width="150" Content="Run" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20"></Button>
+        <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="RunAlgorithms" Grid.Row="3" Width="150" Content="Run tests" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20"></Button>
 
         <Label Grid.Column="1" Padding="10" HorizontalAlignment="Center">K3M</Label>
         <Label Grid.Column="2" Padding="10" HorizontalAlignment="Center">KMM</Label>

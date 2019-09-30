@@ -5,8 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Thinning.UI.Views"
         mc:Ignorable="d"
-        Title="Progress" Height="200" Width="400">
-    <Grid Margin="80">
-        <ProgressBar Minimum="0" Maximum="100" Value="{Binding ProgressValue}" Height="Auto" Margin="0,0,0.333,-14.333" />
+        WindowStyle="None"
+        Height="200" Width="400"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="White"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Grid Margin="20">
+        <ProgressBar Minimum="0" Maximum="60" Value="{Binding ProgressValue}" Height="20"/>
+        <TextBlock x:Name="TaskInfo" Margin="0,0,0,50" Height="20"></TextBlock>
     </Grid>
 </Window>

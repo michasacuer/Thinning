@@ -21,11 +21,11 @@
             {
                 deletion = false;
 
-                Parallel.For(0, height - 1, y =>
+                Parallel.For(1, height - 1, y =>
                 {
                     int offset = y * stride;
 
-                    for (int x = 0; x < width - 1; x++)
+                    for (int x = 1; x < width - 1; x++)
                     {
                         int positionOfPixel = x + offset;
 
@@ -45,11 +45,11 @@
                     }
                 });
 
-                Parallel.For(0, height, y =>
+                Parallel.For(1, height, y =>
                 {
                     int offset = y * stride;
 
-                    for (int x = 0; x < width; x++)
+                    for (int x = 1; x < width; x++)
                     {
                         int positionOfPixel = x + offset;
 
@@ -77,7 +77,7 @@
                                 }
                             }
 
-                            if (this.consts.DeleteList.Contains(summary))
+                            if (this.consts.DeleteFourList.Contains(summary))
                             {
                                 pixels[positionOfPixel] = Value.Zero;
                                 deletion = true;
@@ -92,11 +92,11 @@
                 {
                     int value = n == 2 ? Value.Two : Value.Three;
 
-                    Parallel.For(0, height, y =>
+                    Parallel.For(1, height, y =>
                     {
                         int offset = y * stride;
 
-                        for (int x = 0; x < width; x++)
+                        for (int x = 1; x < width; x++)
                         {
                             int positionOfPixel = x + offset;
 

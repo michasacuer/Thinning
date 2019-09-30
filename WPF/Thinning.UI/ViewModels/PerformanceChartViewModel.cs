@@ -22,14 +22,14 @@
             {
                 new ColumnSeries
                 {
-                    Title = "Execute time (Ms)",
+                    Title = "Execution time (Ms)",
                     Values = testValues,
                 },
             };
 
-            var labels = new string[10];
+            var labels = new string[testValues.Count];
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < testValues.Count; i++)
             {
                 labels[i] = $"Run {i + 1}";
             }
