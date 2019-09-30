@@ -31,7 +31,7 @@
                     }
                     else
                     {
-                        progressViewModel.TaskInfo = "ZhangSuen Executing";
+                        progressViewModel.TaskInfo = "KMM Executing";
                     }
 
                     progressViewModel.ProgressValue = i;

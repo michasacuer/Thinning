@@ -26,11 +26,11 @@
             {
                 deletion = false;
 
-                Parallel.For(0, height - 1, y =>
+                Parallel.For(1, height - 1, y =>
                 {
                     int offset = y * stride;
 
-                    for (int x = 0; x < width - 1; x++)
+                    for (int x = 1; x < width - 1; x++)
                     {
                         int positionOfPixel = x + offset;
                         if (pixels[positionOfPixel] == Value.One)
@@ -69,11 +69,11 @@
 
                 for (int i = 1; i < this.consts.A.Length; i++)
                 {
-                    Parallel.For(0, height - 1, y =>
+                    Parallel.For(1, height - 1, y =>
                     {
-                        int offset = y * stride; 
+                        int offset = y * stride;
 
-                        for (int x = 0; x < width - 1; x++)
+                        for (int x = 1; x < width - 1; x++)
                         {
                             int positionOfPixel = x + offset;
                             if (pixels[positionOfPixel] == Value.Two)
@@ -116,7 +116,7 @@
                 {
                     int offset = y * stride;
 
-                    for (int x = 0; x < width - 1; x++)
+                    for (int x = 1; x < width - 1; x++)
                     {
                         int positionOfPixel = x + offset;
                         if (pixels[positionOfPixel] != Value.Zero)

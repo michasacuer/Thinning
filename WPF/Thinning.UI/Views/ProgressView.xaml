@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Thinning.UI.Views"
         mc:Ignorable="d"
         WindowStyle="None"
+        ResizeMode="NoResize"
         Height="200" Width="400"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
