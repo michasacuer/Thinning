@@ -40,7 +40,7 @@
 
             int bytes = bmpData.Stride * bitmap.Height;
 
-            byte[][] researchSamples = new byte[testsCount][];
+            byte[][] researchSamples = new byte[testsCount * 3][];
 
             for (int i = 0; i < testsCount * 3; i++)
             {
@@ -140,7 +140,6 @@
 
             Thread.Sleep(500);
 
-            bitmap = conversion.CreateNonIndexedImage(bitmap);
             bitmap = conversion.Binarize(bitmap);
             bitmap = conversion.Create8bppGreyscaleImage(bitmap);
 
