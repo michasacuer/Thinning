@@ -61,21 +61,24 @@
             var algorithmTest = new AlgorithmTest();
             var testResult = await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
 
-            var conversion = new Conversion();
+            if (testResult != null)
+            {
+                var conversion = new Conversion();
 
-            this.K3MAlgorithmResult = conversion.BitmapToBitmapImage(testResult.K3MBitmapResult);
-            this.NotifyOfPropertyChange(() => this.K3MAlgorithmResult);
+                this.K3MAlgorithmResult = conversion.BitmapToBitmapImage(testResult.K3MBitmapResult);
+                this.NotifyOfPropertyChange(() => this.K3MAlgorithmResult);
 
-            this.KMMAlgorithmResult = conversion.BitmapToBitmapImage(testResult.KMMBitmapResult);
-            this.NotifyOfPropertyChange(() => this.KMMAlgorithmResult);
+                this.KMMAlgorithmResult = conversion.BitmapToBitmapImage(testResult.KMMBitmapResult);
+                this.NotifyOfPropertyChange(() => this.KMMAlgorithmResult);
 
-            this.ZhangSuenAlgorithmResult = conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult);
-            this.NotifyOfPropertyChange(() => this.ZhangSuenAlgorithmResult);
+                this.ZhangSuenAlgorithmResult = conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult);
+                this.NotifyOfPropertyChange(() => this.ZhangSuenAlgorithmResult);
 
-            this.Items[0] = new PerformanceChartViewModel(testResult.K3MResultTimes, "K3M");
-            this.Items[1] = new PerformanceChartViewModel(testResult.KMMResultTimes, "KMM");
-            this.Items[2] = new PerformanceChartViewModel(testResult.ZhangSuenResultTimes, "Zhang Suen");
-            this.NotifyOfPropertyChange(() => this.Items);
+                this.Items[0] = new PerformanceChartViewModel(testResult.K3MResultTimes, "K3M");
+                this.Items[1] = new PerformanceChartViewModel(testResult.KMMResultTimes, "KMM");
+                this.Items[2] = new PerformanceChartViewModel(testResult.ZhangSuenResultTimes, "Zhang Suen");
+                this.NotifyOfPropertyChange(() => this.Items);
+            }
 
             this.IsButtonsEnabled = true;
             this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);

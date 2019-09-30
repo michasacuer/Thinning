@@ -1,6 +1,7 @@
 ﻿namespace Thinning.UI.Helpers
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Autofac;
     using Thinning.Contracts;
@@ -13,11 +14,11 @@
         public async Task<TestResult> ExecuteAsync(string imageFilepath, ProgressViewModel progressViewModel)
         {
             var container = ContainerConfig.Configure();
-            var testResult = new TestResult();
 
             using (var scope = container.BeginLifetimeScope())
             {
                 var test = scope.Resolve<ITest>();
+                progressViewModel.CancellationToken = new CancellationTokenSource();
 
                 IProgress<int> progress = new Progress<int>((i) =>
                 {
@@ -39,12 +40,17 @@
                     progressViewModel.NotifyOfPropertyChange(() => progressViewModel.TaskInfo);
                 });
 
-                testResult = await Task.Run(() => test.Run(imageFilepath, progress));
+                var testResult = await Task.Run(
+                    () => test.Run(
+                    imageFilepath,
+                    progress,
+                    progressViewModel.CancellationToken.Token),
+                    progressViewModel.CancellationToken.Token);
+
+                await progressViewModel.TryCloseAsync();
+
+                return testResult;
             }
-
-            await progressViewModel.TryCloseAsync();
-
-            return testResult;
         }
     }
 }
