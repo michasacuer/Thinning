@@ -16,7 +16,8 @@
         TextOptions.TextFormattingMode="Ideal" 
         TextOptions.TextRenderingMode="Auto"        
         Background="White"
-        FontFamily="{DynamicResource MaterialDesignFont}">
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        WindowStartupLocation="CenterScreen">
     <Grid>
         
         <Grid.ColumnDefinitions>
