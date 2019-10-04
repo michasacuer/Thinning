@@ -56,10 +56,120 @@
         </materialDesign:Card>
 
         <Image Source="{Binding BaseImageUrl}" Grid.Row="0" Grid.Column="0" Margin="10"/>
-        
-        <Image Height="180" Width="180" Source="{Binding K3MAlgorithmResult}" Grid.Column="1" />
-        <Image Height="180" Width="180" Source="{Binding KMMAlgorithmResult}" Grid.Column="2" />
-        <Image Height="180" Width="180" Source="{Binding ZhangSuenAlgorithmResult}" Grid.Column="3" />
+
+        <Grid Height="180" Width="180" Grid.Column="1">
+            <Image Height="180" Width="180" Source="{Binding K3MAlgorithmResult}">
+                <Image.LayoutTransform>
+                    <ScaleTransform x:Name="st" CenterX="90" CenterY="90" ScaleX="1" ScaleY="1" />
+                </Image.LayoutTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="st"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                             To="3.0" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="st"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                             To="3.0" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Image.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="st"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                             To="1.0" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="st"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                             To="1.0" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+        </Grid>
+
+        <Grid Height="180" Width="180" Grid.Column="2">
+            <Image Height="180" Width="180" Source="{Binding KMMAlgorithmResult}">
+                <Image.LayoutTransform>
+                    <ScaleTransform x:Name="st2" CenterX="90" CenterY="90" ScaleX="1" ScaleY="1" />
+                </Image.LayoutTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="st2"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                             To="3.0" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="st2"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                             To="3.0" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Image.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="st2"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                             To="1.0" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="st2"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                             To="1.0" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+        </Grid>
+
+        <Grid Height="180" Width="180" Grid.Column="3">
+            <Image Height="180" Width="180" Source="{Binding ZhangSuenAlgorithmResult}">
+                <Image.LayoutTransform>
+                    <ScaleTransform x:Name="st3" CenterX="90" CenterY="90" ScaleX="1" ScaleY="1" />
+                </Image.LayoutTransform>
+                <Image.Triggers>
+                    <EventTrigger RoutedEvent="Image.MouseEnter">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="st3"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                             To="3.0" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="st3"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                             To="3.0" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                    <EventTrigger RoutedEvent="Image.MouseLeave">
+                        <EventTrigger.Actions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="st3"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleX)"
+                                             To="1.0" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="st3"
+                                             Storyboard.TargetProperty="(ScaleTransform.ScaleY)"
+                                             To="1.0" Duration="0:0:0" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger.Actions>
+                    </EventTrigger>
+                </Image.Triggers>
+            </Image>
+        </Grid>
 
         <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="LoadImage" Grid.Row="3" Width="150" Content="Load image" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"></Button>
         <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="RunAlgorithms" Grid.Row="3" Width="150" Content="Run tests" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20"></Button>
