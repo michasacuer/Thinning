@@ -93,6 +93,7 @@
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PerformanceChartViewModel.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />
+    <Compile Include="Views\ViewBoxTracking.cs" />
     <Compile Include="Views\MainWindowView.xaml.cs">
       <DependentUpon>MainWindowView.xaml</DependentUpon>
     </Compile>
