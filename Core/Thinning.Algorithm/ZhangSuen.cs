@@ -61,11 +61,6 @@
 
                 Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
 
-                if (!deletion)
-                {
-                    break;
-                }
-
                 Parallel.For(1, height - 1, y =>
                 {
                     int offset = y * stride;

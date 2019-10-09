@@ -17,7 +17,7 @@
                 <lvc:Axis Title="Run" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis Title="Time" LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                <lvc:Axis LabelFormatter="{Binding Formatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </Grid>
