@@ -25,18 +25,16 @@
         {
             int iterations = 20;
 
-            var bitmap = new Bitmap(imageFilepath);
-            BitmapData bitmapData;
-
             try
             {
-                bitmap = this.PrepareBitmapToTestRun(bitmap);
+                BitmapData bitmapData;
+
+                var bitmap = this.PrepareBitmapToTestRun(new Bitmap(imageFilepath));
                 var testSamples = this.PrepareTestSamples(bitmap, iterations, out bitmapData);
                 var timesTestResult = this.RunAllAlgorithmsTestInterations(bitmap, bitmapData, testSamples, iterations, progress, cancellationToken);
                 var bitmapsTestResult = this.ByteArraysToBitmapResults(testSamples, bitmap.Width, bitmap.Height, bitmap.PixelFormat);
 
                 return new TestResult(timesTestResult, bitmapsTestResult);
-
             }
             catch (OperationCanceledException)
             {
