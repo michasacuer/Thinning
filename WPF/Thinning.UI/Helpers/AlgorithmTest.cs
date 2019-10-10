@@ -44,8 +44,7 @@
                     () => test.Run(
                     imageFilepath,
                     progress,
-                    progressViewModel.CancellationToken.Token),
-                    progressViewModel.CancellationToken.Token);
+                    progressViewModel.CancellationToken.Token), progressViewModel.CancellationToken.Token);
 
                 await progressViewModel.TryCloseAsync();
 

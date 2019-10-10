@@ -13,120 +13,30 @@
 
     public class Test : ITest
     {
-        private IK3M k3M;
-
-        private IKMM kMM;
-
-        private IZhangSuen zhangSuen;
+        private List<IAlgorithm> algorithms;
 
         public Test(IK3M k3M, IKMM kMM, IZhangSuen zhangSuen)
         {
-            this.k3M = k3M;
-            this.kMM = kMM;
-            this.zhangSuen = zhangSuen;
+            this.algorithms = new List<IAlgorithm>();
+            this.algorithms.AddRange(new IAlgorithm[] { k3M, kMM, zhangSuen });
         }
 
         public TestResult Run(string imageFilepath, IProgress<int> progress, CancellationToken cancellationToken)
         {
-            int testsCount = 20;
+            int iterations = 20;
+
             var bitmap = new Bitmap(imageFilepath);
-
-            bitmap = this.PrepareBitmapToTestRun(bitmap);
-
-            BitmapData bmpData = bitmap.LockBits(
-                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
-                ImageLockMode.ReadWrite,
-                bitmap.PixelFormat);
-
-            int bytes = bmpData.Stride * bitmap.Height;
-
-            byte[][] researchSamples = new byte[testsCount * 3][];
-
-            for (int i = 0; i < testsCount * 3; i++)
-            {
-                researchSamples[i] = new byte[bytes];
-                Marshal.Copy(bmpData.Scan0, researchSamples[i], 0, bytes);
-            }
-
-            int height = bitmap.Height;
-            int width = bitmap.Width;
-
-            var stopwatch = new Stopwatch();
-
-            var k3MResultTimes = new List<double>();
-            var kMMResultTimes = new List<double>();
-            var zhangSuenResultTimes = new List<double>();
-            int sample = 0;
-            int progressValue = 1;
+            BitmapData bitmapData;
 
             try
             {
-                for (int i = 0; i < testsCount; i++)
-                {
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        bitmap.UnlockBits(bmpData);
-                        cancellationToken.ThrowIfCancellationRequested();
-                    }
+                bitmap = this.PrepareBitmapToTestRun(bitmap);
+                var testSamples = this.PrepareTestSamples(bitmap, iterations, out bitmapData);
+                var timesTestResult = this.RunAllAlgorithmsTestInterations(bitmap, bitmapData, testSamples, iterations, progress, cancellationToken);
+                var bitmapsTestResult = this.ByteArraysToBitmapResults(testSamples, bitmap.Width, bitmap.Height, bitmap.PixelFormat);
 
-                    stopwatch.Start();
-                    researchSamples[sample] = this.k3M.Execute(researchSamples[sample], bmpData.Stride, height, width);
-                    stopwatch.Stop();
+                return new TestResult(timesTestResult, bitmapsTestResult);
 
-                    k3MResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
-
-                    stopwatch.Reset();
-                    sample++;
-                    progress.Report(progressValue++);
-                }
-
-                for (int i = 0; i < testsCount; i++)
-                {
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        bitmap.UnlockBits(bmpData);
-                        cancellationToken.ThrowIfCancellationRequested();
-                    }
-
-                    stopwatch.Start();
-                    researchSamples[sample] = this.kMM.Execute(researchSamples[sample], bmpData.Stride, height, width);
-                    stopwatch.Stop();
-
-                    kMMResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
-
-                    stopwatch.Reset();
-                    sample++;
-                    progress.Report(progressValue++);
-                }
-
-                for (int i = 0; i < testsCount; i++)
-                {
-                    if (cancellationToken.IsCancellationRequested)
-                    {
-                        bitmap.UnlockBits(bmpData);
-                        cancellationToken.ThrowIfCancellationRequested();
-                    }
-
-                    stopwatch.Start();
-                    researchSamples[sample] = this.zhangSuen.Execute(researchSamples[sample], bmpData.Stride, height, width);
-                    stopwatch.Stop();
-
-                    zhangSuenResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
-
-                    stopwatch.Reset();
-                    sample++;
-                    progress.Report(progressValue++);
-                }
-
-                bitmap.UnlockBits(bmpData);
-
-                var testResult = this.ByteArraysToBitmapResults(researchSamples, width, height, bitmap.PixelFormat);
-
-                testResult.K3MResultTimes = k3MResultTimes;
-                testResult.KMMResultTimes = kMMResultTimes;
-                testResult.ZhangSuenResultTimes = zhangSuenResultTimes;
-
-                return testResult;
             }
             catch (OperationCanceledException)
             {
@@ -136,14 +46,95 @@
 
         private Bitmap PrepareBitmapToTestRun(Bitmap bitmap)
         {
-            var conversion = new Conversion();
-
             Thread.Sleep(500);
 
+            var conversion = new Conversion();
             bitmap = conversion.Binarize(bitmap);
             bitmap = conversion.Create8bppGreyscaleImage(bitmap);
 
             return bitmap;
+        }
+
+        private byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out BitmapData bitmapData)
+        {
+            bitmapData = bitmap.LockBits(
+                new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                ImageLockMode.ReadWrite,
+                bitmap.PixelFormat);
+
+            int bytes = bitmapData.Stride * bitmap.Height;
+            byte[][] testSamples = new byte[iterations * 3][];
+
+            for (int i = 0; i < iterations * 3; i++)
+            {
+                testSamples[i] = new byte[bytes];
+                Marshal.Copy(bitmapData.Scan0, testSamples[i], 0, bytes);
+            }
+
+            return testSamples;
+        }
+
+        private TestResult RunAllAlgorithmsTestInterations(
+            Bitmap bitmap,
+            BitmapData bitmapData,
+            byte[][] testSamples,
+            int iterations,
+            IProgress<int> progress,
+            CancellationToken cancellationToken)
+        {
+            var k3MResultTimes = new List<double>();
+            var kMMResultTimes = new List<double>();
+            var zhangSuenResultTimes = new List<double>();
+
+            int sample = 0;
+            int progressValue = 1;
+            int whichAlgorithm = 0;
+
+            var stopwatch = new Stopwatch();
+
+            foreach (var algorithm in this.algorithms)
+            {
+                for (int i = 0; i < iterations; i++)
+                {
+                    if (cancellationToken.IsCancellationRequested)
+                    {
+                        bitmap.UnlockBits(bitmapData);
+                        cancellationToken.ThrowIfCancellationRequested();
+                    }
+
+                    stopwatch.Start();
+                    testSamples[sample] = algorithm.Execute(testSamples[sample], bitmapData.Stride, bitmap.Height, bitmap.Width);
+                    stopwatch.Stop();
+
+                    switch (whichAlgorithm)
+                    {
+                        case 0:
+                            k3MResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            break;
+                        case 1:
+                            kMMResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            break;
+                        case 2:
+                            zhangSuenResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            break;
+                    }
+
+                    stopwatch.Reset();
+                    sample++;
+                    progress.Report(progressValue++);
+                }
+
+                whichAlgorithm++;
+            }
+
+            bitmap.UnlockBits(bitmapData);
+
+            return new TestResult
+            {
+                K3MResultTimes = k3MResultTimes,
+                KMMResultTimes = kMMResultTimes,
+                ZhangSuenResultTimes = zhangSuenResultTimes
+            };
         }
 
         private TestResult ByteArraysToBitmapResults(byte[][] researchSamples, int width, int height, PixelFormat originPixelFormat)
