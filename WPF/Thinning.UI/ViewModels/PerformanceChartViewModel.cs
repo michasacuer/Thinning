@@ -22,7 +22,7 @@
             {
                 new ColumnSeries
                 {
-                    Title = "Execution time (Ms)",
+                    Title = "Time (Ms)",
                     Values = testValues,
                 },
             };
