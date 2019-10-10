@@ -60,13 +60,13 @@
                 ImageLockMode.ReadWrite,
                 bitmap.PixelFormat);
 
-            int bytes = bitmapData.Stride * bitmap.Height;
+            int pixelsCount = bitmapData.Stride * bitmap.Height;
             byte[][] testSamples = new byte[iterations * 3][];
 
             for (int i = 0; i < iterations * 3; i++)
             {
-                testSamples[i] = new byte[bytes];
-                Marshal.Copy(bitmapData.Scan0, testSamples[i], 0, bytes);
+                testSamples[i] = new byte[pixelsCount];
+                Marshal.Copy(bitmapData.Scan0, testSamples[i], 0, pixelsCount);
             }
 
             return testSamples;
