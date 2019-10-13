@@ -72,6 +72,7 @@
     <Compile Include="Interfaces\IK3M.cs" />
     <Compile Include="Interfaces\IKMM.cs" />
     <Compile Include="Interfaces\ITest.cs" />
+    <Compile Include="Interfaces\ITestWorker.cs" />
     <Compile Include="Interfaces\IZhangSuen.cs" />
     <Compile Include="Models\TestResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

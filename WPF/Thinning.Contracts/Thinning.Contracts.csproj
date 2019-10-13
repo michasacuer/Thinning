@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Algorithm\Test.cs" />
+    <Compile Include="Algorithm\TestWorker.cs" />
     <Compile Include="ContainerConfig.cs" />
     <Compile Include="Infrastructure\Hardware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
