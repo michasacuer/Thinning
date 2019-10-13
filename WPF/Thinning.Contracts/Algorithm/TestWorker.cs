@@ -114,7 +114,6 @@
             }
             catch (OperationCanceledException)
             {
-                bitmap.UnlockBits(bitmapData);
                 return null;
             }
         }
