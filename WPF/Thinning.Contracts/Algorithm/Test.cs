@@ -19,7 +19,6 @@
         public TestResult Run(string imageFilepath, IProgress<int> progress, CancellationToken cancellationToken)
         {
             int iterations = 20;
-
             BitmapData bitmapData;
 
             var bitmap = this.worker.PrepareBitmapToTestRun(new Bitmap(imageFilepath));

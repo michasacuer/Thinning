@@ -68,54 +68,47 @@
 
             var stopwatch = new Stopwatch();
 
-            try
+            foreach (var algorithm in this.algorithms)
             {
-                foreach (var algorithm in this.algorithms)
+                for (int i = 0; i < iterations; i++)
                 {
-                    for (int i = 0; i < iterations; i++)
+                    if (cancellationToken.IsCancellationRequested)
                     {
-                        if (cancellationToken.IsCancellationRequested)
-                        {
-                            bitmap.UnlockBits(bitmapData);
-                            cancellationToken.ThrowIfCancellationRequested();
-                        }
-
-                        stopwatch.Start();
-                        testSamples[sample] = algorithm.Execute(testSamples[sample], bitmapData.Stride, bitmap.Height, bitmap.Width);
-                        stopwatch.Stop();
-
-                        switch (whichAlgorithm)
-                        {
-                            case 0:
-                                k3MResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
-                                break;
-                            case 1:
-                                kMMResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
-                                break;
-                            case 2:
-                                zhangSuenResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
-                                break;
-                        }
-
-                        stopwatch.Reset();
-                        sample++;
-                        progress.Report(progressValue++);
+                        bitmap.UnlockBits(bitmapData);
+                        return null;
                     }
 
-                    whichAlgorithm++;
+                    stopwatch.Start();
+                    testSamples[sample] = algorithm.Execute(testSamples[sample], bitmapData.Stride, bitmap.Height, bitmap.Width);
+                    stopwatch.Stop();
+
+                    switch (whichAlgorithm)
+                    {
+                        case 0:
+                            k3MResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            break;
+                        case 1:
+                            kMMResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            break;
+                        case 2:
+                            zhangSuenResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            break;
+                    }
+
+                    stopwatch.Reset();
+                    sample++;
+                    progress.Report(progressValue++);
                 }
 
-                return new TestResult
-                {
-                    K3MResultTimes = k3MResultTimes,
-                    KMMResultTimes = kMMResultTimes,
-                    ZhangSuenResultTimes = zhangSuenResultTimes,
-                };
+                whichAlgorithm++;
             }
-            catch (OperationCanceledException)
+
+            return new TestResult
             {
-                return null;
-            }
+                K3MResultTimes = k3MResultTimes,
+                KMMResultTimes = kMMResultTimes,
+                ZhangSuenResultTimes = zhangSuenResultTimes,
+            };
         }
 
         public TestResult ByteArraysToBitmapResults(byte[][] researchSamples, Bitmap bitmap)
