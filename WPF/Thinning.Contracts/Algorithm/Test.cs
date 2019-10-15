@@ -32,7 +32,7 @@
                 var bitmap = this.PrepareBitmapToTestRun(new Bitmap(imageFilepath));
                 var testSamples = this.PrepareTestSamples(bitmap, iterations, out bitmapData);
                 var timesTestResult = this.RunAllAlgorithmsTestInterations(bitmap, bitmapData, testSamples, iterations, progress, cancellationToken);
-                var bitmapsTestResult = this.ByteArraysToBitmapResults(testSamples, bitmap.Width, bitmap.Height, bitmap.PixelFormat);
+                var bitmapsTestResult = this.ByteArraysToBitmapResults(testSamples, bitmap);
 
                 return new TestResult(timesTestResult, bitmapsTestResult);
             }
@@ -131,20 +131,20 @@
             {
                 K3MResultTimes = k3MResultTimes,
                 KMMResultTimes = kMMResultTimes,
-                ZhangSuenResultTimes = zhangSuenResultTimes
+                ZhangSuenResultTimes = zhangSuenResultTimes,
             };
         }
 
-        private TestResult ByteArraysToBitmapResults(byte[][] researchSamples, int width, int height, PixelFormat originPixelFormat)
+        private TestResult ByteArraysToBitmapResults(byte[][] researchSamples, Bitmap bitmap)
         {
-            var k3MResultBitmap = new Bitmap(width, height);
-            var kMMResultBitmap = new Bitmap(width, height);
-            var zhangSuenResultBitmap = new Bitmap(width, height);
+            var k3MResultBitmap = new Bitmap(bitmap.Width, bitmap.Height);
+            var kMMResultBitmap = new Bitmap(bitmap.Width, bitmap.Height);
+            var zhangSuenResultBitmap = new Bitmap(bitmap.Width, bitmap.Height);
 
             BitmapData k3MBmpData = k3MResultBitmap.LockBits(
                new Rectangle(0, 0, k3MResultBitmap.Width, k3MResultBitmap.Height),
                ImageLockMode.ReadWrite,
-               originPixelFormat);
+               bitmap.PixelFormat);
 
             Marshal.Copy(researchSamples[1], 0, k3MBmpData.Scan0, researchSamples[1].Length);
             k3MResultBitmap.UnlockBits(k3MBmpData);
@@ -152,7 +152,7 @@
             BitmapData kMMBmpData = kMMResultBitmap.LockBits(
                 new Rectangle(0, 0, kMMResultBitmap.Width, kMMResultBitmap.Height),
                 ImageLockMode.ReadWrite,
-                originPixelFormat);
+                bitmap.PixelFormat);
 
             Marshal.Copy(researchSamples[21], 0, kMMBmpData.Scan0, researchSamples[21].Length);
             kMMResultBitmap.UnlockBits(kMMBmpData);
@@ -160,7 +160,7 @@
             BitmapData zhangSuenBmpData = zhangSuenResultBitmap.LockBits(
                 new Rectangle(0, 0, zhangSuenResultBitmap.Width, zhangSuenResultBitmap.Height),
                 ImageLockMode.ReadWrite,
-                originPixelFormat);
+                bitmap.PixelFormat);
 
             Marshal.Copy(researchSamples[41], 0, zhangSuenBmpData.Scan0, researchSamples[41].Length);
             zhangSuenResultBitmap.UnlockBits(zhangSuenBmpData);
