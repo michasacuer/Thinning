@@ -1,4 +1,4 @@
-﻿namespace Thinning.Infrastructure.Interfaces
+﻿namespace Thinning.Infrastructure.Interfaces.Algorithms
 {
     public interface IZhangSuen : IAlgorithm
     {

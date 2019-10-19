@@ -1,7 +1,5 @@
 ﻿namespace Thinning.Infrastructure.Computer
 {
-    using System;
-    using System.Collections.Generic;
     using System.Management;
     using Microsoft.VisualBasic.Devices;
 

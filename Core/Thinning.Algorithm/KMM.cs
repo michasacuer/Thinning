@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using Thinning.Common.Consts;
-    using Thinning.Infrastructure.Interfaces;
+    using Thinning.Infrastructure.Interfaces.Algorithms;
 
     public class KMM : IKMM
     {

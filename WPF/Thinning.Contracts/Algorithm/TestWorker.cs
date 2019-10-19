@@ -9,6 +9,7 @@
     using System.Threading;
     using Thinning.Infrastructure.Image.Preprocessing;
     using Thinning.Infrastructure.Interfaces;
+    using Thinning.Infrastructure.Interfaces.Algorithms;
     using Thinning.Infrastructure.Models;
 
     public class TestWorker : ITestWorker

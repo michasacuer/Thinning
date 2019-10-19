@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Thinning.Common.Consts;
-    using Thinning.Infrastructure.Interfaces;
+    using Thinning.Infrastructure.Interfaces.Algorithms;
 
     public class K3M : IK3M
     {

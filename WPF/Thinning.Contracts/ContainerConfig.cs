@@ -4,6 +4,7 @@
     using Thinning.Algorithm;
     using Thinning.Contracts.Algorithm;
     using Thinning.Infrastructure.Interfaces;
+    using Thinning.Infrastructure.Interfaces.Algorithms;
 
     public class ContainerConfig
     {
