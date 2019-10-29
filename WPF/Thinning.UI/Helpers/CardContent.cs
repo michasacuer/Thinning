@@ -3,7 +3,7 @@
     using System;
     using System.Drawing;
     using System.IO;
-    using Thinning.Contracts.Infrastructure;
+    using Thinning.Contracts;
     using Thinning.UI.Helpers.Interfaces;
 
     public class CardContent : ICardContent

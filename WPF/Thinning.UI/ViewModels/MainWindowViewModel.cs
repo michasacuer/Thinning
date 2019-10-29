@@ -2,7 +2,7 @@
 {
     using System.Windows.Media;
     using Caliburn.Micro;
-    using Thinning.Infrastructure.Image.Preprocessing;
+    using Thinning.Infrastructure;
     using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
 
@@ -63,7 +63,7 @@
 
             if (testResult != null)
             {
-                var conversion = new Conversion();
+                var conversion = new ImageConversion();
 
                 this.K3MAlgorithmResult = conversion.BitmapToBitmapImage(testResult.K3MBitmapResult);
                 this.NotifyOfPropertyChange(() => this.K3MAlgorithmResult);

@@ -1,4 +1,4 @@
-﻿namespace Thinning.Infrastructure.Computer
+﻿namespace Thinning.Infrastructure
 {
     using System.Management;
     using Microsoft.VisualBasic.Devices;

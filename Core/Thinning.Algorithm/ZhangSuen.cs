@@ -2,7 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Thinning.Common.Consts;
+    using Thinning.Infrastructure.Consts;
     using Thinning.Infrastructure.Interfaces.Algorithms;
 
     public class ZhangSuen : IZhangSuen

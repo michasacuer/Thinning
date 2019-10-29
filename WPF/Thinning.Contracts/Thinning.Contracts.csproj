@@ -48,7 +48,7 @@
     <Compile Include="Algorithm\Test.cs" />
     <Compile Include="Algorithm\TestWorker.cs" />
     <Compile Include="ContainerConfig.cs" />
-    <Compile Include="Infrastructure\Hardware.cs" />
+    <Compile Include="Hardware.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -68,5 +68,6 @@
       <Name>Thinning.Infrastructure</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

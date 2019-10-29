@@ -60,10 +60,6 @@
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Thinning.Common\Thinning.Common.csproj">
-      <Project>{6dd95fdc-2632-4823-89d0-df7932e6f79a}</Project>
-      <Name>Thinning.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Thinning.Infrastructure\Thinning.Infrastructure.csproj">
       <Project>{19b5aece-cce3-4312-ab19-d190af1a1441}</Project>
       <Name>Thinning.Infrastructure</Name>

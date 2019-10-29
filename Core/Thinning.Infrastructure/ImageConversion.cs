@@ -1,4 +1,4 @@
-﻿namespace Thinning.Infrastructure.Image.Preprocessing
+﻿namespace Thinning.Infrastructure
 {
     using System.Drawing;
     using System.Drawing.Imaging;
@@ -7,7 +7,7 @@
     using System.Windows.Media.Imaging;
     using Accord.Imaging.Filters;
 
-    public class Conversion
+    public class ImageConversion
     {
         public Bitmap Create8bppGreyscaleImage(Bitmap bitmap) => Grayscale.CommonAlgorithms.BT709.Apply(bitmap);
 

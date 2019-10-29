@@ -1,9 +1,9 @@
-﻿namespace Thinning.Contracts.Infrastructure
+﻿namespace Thinning.Contracts
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Thinning.Infrastructure.Computer;
+    using Thinning.Infrastructure;
 
     public class Hardware
     {

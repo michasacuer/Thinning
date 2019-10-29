@@ -7,7 +7,7 @@
     using System.Drawing.Imaging;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using Thinning.Infrastructure.Image.Preprocessing;
+    using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Interfaces.Algorithms;
     using Thinning.Infrastructure.Models;
@@ -25,7 +25,7 @@
         {
             Thread.Sleep(500);
 
-            var conversion = new Conversion();
+            var conversion = new ImageConversion();
             bitmap = conversion.Binarize(bitmap);
             bitmap = conversion.Create8bppGreyscaleImage(bitmap);
 
