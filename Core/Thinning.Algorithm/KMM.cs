@@ -31,13 +31,13 @@
 
                         if (pixels[positionOfPixel] == Value.One)
                         {
-                            if (pixels[positionOfPixel + 1] == Value.Zero || pixels[positionOfPixel - 1] == Value.Zero ||
-                                pixels[positionOfPixel + stride] == Value.Zero || pixels[positionOfPixel - stride] == Value.Zero)
+                            if (pixels[positionOfPixel + 1] + pixels[positionOfPixel - 1] +
+                                pixels[positionOfPixel + stride] + pixels[positionOfPixel - stride] < 1020)
                             {
                                 pixels[positionOfPixel] = Value.Two;
                             }
-                            else if (pixels[positionOfPixel - stride + 1] == Value.Zero || pixels[positionOfPixel - stride - 1] == Value.Zero ||
-                                     pixels[positionOfPixel + stride - 1] == Value.Zero || pixels[positionOfPixel + stride - 1] == Value.Zero)
+                            else if (pixels[positionOfPixel - stride + 1] + pixels[positionOfPixel - stride - 1] +
+                                     pixels[positionOfPixel + stride - 1] + pixels[positionOfPixel + stride - 1] < 1020)
                             {
                                 pixels[positionOfPixel] = Value.Three;
                             }
