@@ -1,14 +1,17 @@
 ﻿namespace Thinning.Algorithm
 {
     using System;
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using Thinning.Infrastructure.Consts;
     using Thinning.Infrastructure.Interfaces.Algorithms;
 
     public class ZhangSuen : IZhangSuen
     {
-        public byte[] Execute(byte[] pixels, int stride, int height, int width)
+        public byte[] Execute(byte[] pixels, int stride, int height, int width, out double executionTime)
         {
+            var stopwatch = new Stopwatch();
+
             bool deletion = true;
 
             var temp = new byte[pixels.Length];
@@ -18,6 +21,8 @@
 
             while (deletion)
             {
+                stopwatch.Start();
+
                 deletion = false;
 
                 Parallel.For(1, height - 1, y =>
@@ -102,6 +107,9 @@
 
                 Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
             }
+
+            stopwatch.Stop();
+            executionTime = (double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000;
 
             return pixels;
         }

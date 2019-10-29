@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Imaging;
     using System.Runtime.InteropServices;
@@ -70,8 +69,6 @@
             int progressValue = 1;
             int whichAlgorithm = 0;
 
-            var stopwatch = new Stopwatch();
-
             foreach (var algorithm in this.algorithms)
             {
                 for (int i = 0; i < iterations; i++)
@@ -81,24 +78,22 @@
                         return null;
                     }
 
-                    stopwatch.Start();
-                    testSamples[sample] = algorithm.Execute(testSamples[sample], stride, bitmap.Height, bitmap.Width);
-                    stopwatch.Stop();
+                    double executionTime;
+                    testSamples[sample] = algorithm.Execute(testSamples[sample], stride, bitmap.Height, bitmap.Width, out executionTime);
 
                     switch (whichAlgorithm)
                     {
                         case 0:
-                            k3MResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            k3MResultTimes.Add(executionTime);
                             break;
                         case 1:
-                            kMMResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            kMMResultTimes.Add(executionTime);
                             break;
                         case 2:
-                            zhangSuenResultTimes.Add((double)stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000);
+                            zhangSuenResultTimes.Add(executionTime);
                             break;
                     }
 
-                    stopwatch.Reset();
                     sample++;
                     progress.Report(progressValue++);
                 }

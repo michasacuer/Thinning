@@ -1,5 +1,6 @@
 ﻿namespace Thinning.Algorithm
 {
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using Thinning.Infrastructure.Consts;
     using Thinning.Infrastructure.Interfaces.Algorithms;
@@ -8,17 +9,22 @@
     {
         private KMMConsts consts;
 
+        private Stopwatch stopwatch;
+
         public KMM()
         {
+            this.stopwatch = new Stopwatch();
             this.consts = new KMMConsts();
         }
 
-        public byte[] Execute(byte[] pixels, int stride, int height, int width)
+        public byte[] Execute(byte[] pixels, int stride, int height, int width, out double executionTime)
         {
             bool deletion = true;
 
             while (deletion)
             {
+                this.stopwatch.Start();
+
                 deletion = false;
 
                 Parallel.For(1, height - 1, y =>
@@ -31,13 +37,13 @@
 
                         if (pixels[positionOfPixel] == Value.One)
                         {
-                            if (pixels[positionOfPixel + 1] + pixels[positionOfPixel - 1] +
-                                pixels[positionOfPixel + stride] + pixels[positionOfPixel - stride] < 1020)
+                            if (pixels[positionOfPixel + 1] == Value.Zero || pixels[positionOfPixel - 1] == Value.Zero ||
+                                pixels[positionOfPixel + stride] == Value.Zero || pixels[positionOfPixel - stride] == Value.Zero)
                             {
                                 pixels[positionOfPixel] = Value.Two;
                             }
-                            else if (pixels[positionOfPixel - stride + 1] + pixels[positionOfPixel - stride - 1] +
-                                     pixels[positionOfPixel + stride - 1] + pixels[positionOfPixel + stride - 1] < 1020)
+                            else if (pixels[positionOfPixel - stride + 1] == Value.Zero || pixels[positionOfPixel - stride - 1] == Value.Zero ||
+                                     pixels[positionOfPixel + stride - 1] == Value.Zero || pixels[positionOfPixel + stride - 1] == Value.Zero)
                             {
                                 pixels[positionOfPixel] = Value.Three;
                             }
@@ -140,6 +146,10 @@
                     n++;
                 }
             }
+
+            this.stopwatch.Stop();
+            executionTime = (double)this.stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000;
+            this.stopwatch.Restart();
 
             return pixels;
         }

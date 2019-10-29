@@ -2,6 +2,6 @@
 {
     public interface IAlgorithm
     {
-        byte[] Execute(byte[] pixels, int stride, int height, int width);
+        byte[] Execute(byte[] pixels, int stride, int height, int width, out double executionTime);
     }
 }
