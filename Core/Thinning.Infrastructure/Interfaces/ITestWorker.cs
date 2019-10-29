@@ -2,7 +2,6 @@
 {
     using System;
     using System.Drawing;
-    using System.Drawing.Imaging;
     using System.Threading;
     using Thinning.Infrastructure.Models;
 
@@ -10,11 +9,11 @@
     {
         Bitmap PrepareBitmapToTestRun(Bitmap bitmap);
 
-        byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out BitmapData bitmapData);
+        byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out int stride);
 
         TestResult RunAllAlgorithmsTestInterations(
             Bitmap bitmap,
-            BitmapData bitmapData,
+            int stride,
             byte[][] testSamples,
             int iterations,
             IProgress<int> progress,

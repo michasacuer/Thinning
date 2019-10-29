@@ -32,9 +32,9 @@
             return bitmap;
         }
 
-        public byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out BitmapData bitmapData)
+        public byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out int stride)
         {
-            bitmapData = bitmap.LockBits(
+            var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
                 ImageLockMode.ReadWrite,
                 bitmap.PixelFormat);
@@ -48,12 +48,15 @@
                 Marshal.Copy(bitmapData.Scan0, testSamples[i], 0, pixelsCount);
             }
 
+            stride = bitmapData.Stride;
+            bitmap.UnlockBits(bitmapData);
+
             return testSamples;
         }
 
         public TestResult RunAllAlgorithmsTestInterations(
             Bitmap bitmap,
-            BitmapData bitmapData,
+            int stride,
             byte[][] testSamples,
             int iterations,
             IProgress<int> progress,
@@ -75,12 +78,11 @@
                 {
                     if (cancellationToken.IsCancellationRequested)
                     {
-                        bitmap.UnlockBits(bitmapData);
                         return null;
                     }
 
                     stopwatch.Start();
-                    testSamples[sample] = algorithm.Execute(testSamples[sample], bitmapData.Stride, bitmap.Height, bitmap.Width);
+                    testSamples[sample] = algorithm.Execute(testSamples[sample], stride, bitmap.Height, bitmap.Width);
                     stopwatch.Stop();
 
                     switch (whichAlgorithm)
