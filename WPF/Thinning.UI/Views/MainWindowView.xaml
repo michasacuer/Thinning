@@ -44,16 +44,36 @@
             </TextBlock>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="135" Width="360" Margin="20">
+        <materialDesign:Card Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="100" Width="360" Margin="0, 0, 0, 57">
             <TextBlock 
                 Margin="10"
-                FontSize="15"
+                FontSize="14"
                 x:Name="HardwareInfo"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left" 
                 Style="{DynamicResource MaterialDesignTitleTextBlock}">
             </TextBlock>
         </materialDesign:Card>
+
+        <materialDesign:Card Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="60" Width="360" Margin="0, 0, 0, -10">
+            <TextBlock 
+                Margin="10"
+                FontSize="14"
+                Text="Iterations:"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Left" 
+                Style="{DynamicResource MaterialDesignTitleTextBlock}">
+            </TextBlock>
+        </materialDesign:Card>
+
+        <ComboBox 
+            x:Name="IterationsList"
+            SelectedValue="{Binding Path=SelectedIterationsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Width="50" 
+            FontSize="14" 
+            Grid.Row="1" 
+            Margin="200, 0, 0, -240">
+        </ComboBox>
 
         <Image x:Name="MainImage" Source="{Binding BaseImageUrl}" Grid.Row="0" Grid.Column="0" Margin="10"/>
 

@@ -1,6 +1,7 @@
 ﻿namespace Thinning.UI.ViewModels
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Threading.Tasks;
     using System.Windows.Media;
@@ -36,13 +37,17 @@
 
         public string BaseImageUrl { get; set; }
 
-        public ObservableCollection<Tuple<string, ImageSource>> Images { get; set; } = new ObservableCollection<Tuple<string, ImageSource>>();
+        public ObservableCollection<Tuple<string, ImageSource>> Images { get; set; }
 
         public bool IsButtonsEnabled { get; set; } = true;
 
         public string HardwareInfo { get; set; }
 
         public string ImageInfo { get; set; }
+
+        public int SelectedIterationsCount { get; set; }
+
+        public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50 });
 
         public void LoadImage()
         {
@@ -61,7 +66,6 @@
             this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
 
             var testResult = await this.ExecuteTests();
-
             if (testResult != null)
             {
                 this.AttachResultsToAlgorithms(testResult);
@@ -79,10 +83,12 @@
 
         private async Task<TestResult> ExecuteTests()
         {
-            var progressViewModel = new ProgressViewModel();
+            int iterations = this.SelectedIterationsCount;
+
+            var progressViewModel = new ProgressViewModel(iterations,  this.Items.Count);
             await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
 
-            var algorithmTest = new AlgorithmTest();
+            var algorithmTest = new AlgorithmTest(iterations);
             return await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
         }
 
@@ -90,6 +96,8 @@
         {
             var conversion = new ImageConversion();
             int algorithmCount = 0;
+
+            this.Images = new ObservableCollection<Tuple<string, ImageSource>>();
 
             foreach (var timesList in testResult.ResultTimes)
             {

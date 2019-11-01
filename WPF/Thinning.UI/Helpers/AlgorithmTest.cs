@@ -11,6 +11,13 @@
 
     public class AlgorithmTest
     {
+        private readonly int algorithmIterations;
+
+        public AlgorithmTest(int algorithmIterations)
+        {
+            this.algorithmIterations = algorithmIterations;
+        }
+
         public async Task<TestResult> ExecuteAsync(string imageFilepath, ProgressViewModel progressViewModel)
         {
             var container = ContainerConfig.Configure();
@@ -20,31 +27,33 @@
                 var test = scope.Resolve<ITest>();
                 progressViewModel.CancellationToken = new CancellationTokenSource();
 
-                IProgress<int> progress = new Progress<int>((i) =>
+                int i = 0;
+                int whichAlgorithm = 1;
+
+                IProgress<int> progress = new Progress<int>((progressValue) =>
                 {
-                    if (i <= 20)
+                    if (i < this.algorithmIterations)
                     {
-                        progressViewModel.TaskInfo = "K3M Executing";
-                    }
-                    else if (i > 20 && i < 40)
-                    {
-                        progressViewModel.TaskInfo = "KMM Executing";
+                        progressViewModel.TaskInfo = $"Algorithm number {whichAlgorithm} executing...";
+                        i++;
                     }
                     else
                     {
-                        progressViewModel.TaskInfo = "ZhagnSuen Executing";
+                        i = 0;
+                        whichAlgorithm++;
                     }
 
-                    progressViewModel.ProgressValue = i;
+                    progressViewModel.ProgressValue = progressValue;
                     progressViewModel.NotifyOfPropertyChange(() => progressViewModel.ProgressValue);
                     progressViewModel.NotifyOfPropertyChange(() => progressViewModel.TaskInfo);
                 });
 
                 var testResult = await Task.Run(
                     () => test.Run(
-                    imageFilepath,
-                    progress,
-                    progressViewModel.CancellationToken.Token), progressViewModel.CancellationToken.Token);
+                        this.algorithmIterations,
+                        imageFilepath,
+                        progress,
+                        progressViewModel.CancellationToken.Token), progressViewModel.CancellationToken.Token);
 
                 await progressViewModel.TryCloseAsync();
 
