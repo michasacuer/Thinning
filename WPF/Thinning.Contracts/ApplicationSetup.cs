@@ -18,10 +18,7 @@
             interfaces.Remove(typeof(IAlgorithm));
 
             var interfacesNames = new List<string>();
-            foreach (var type in interfaces)
-            {
-                interfacesNames.Add(type.Name);
-            }
+            interfaces.ForEach(i => interfacesNames.Add(i.Name));
 
             return interfacesNames;
         }
@@ -29,13 +26,12 @@
         public List<IAlgorithm> GetRegisteredAlgorithmInstances()
         {
             var algorithmAssemly = typeof(K3M).Assembly;
-            var algorithmAssemblies = algorithmAssemly.DefinedTypes.Where(type => type.ImplementedInterfaces.Any(inter => inter == typeof(IAlgorithm))).ToList();
+            var algorithmAssemblies = algorithmAssemly.DefinedTypes.Where(type =>
+                    type.ImplementedInterfaces.Any(inter => inter == typeof(IAlgorithm))).ToList();
 
             var algorithmInstances = new List<IAlgorithm>();
-            foreach (var algorithm in algorithmAssemblies)
-            {
-                algorithmInstances.Add((IAlgorithm)Activator.CreateInstance(algorithm));
-            }
+            algorithmAssemblies.ForEach(algorithm =>
+                algorithmInstances.Add((IAlgorithm)Activator.CreateInstance(algorithm)));
 
             return algorithmInstances;
         }

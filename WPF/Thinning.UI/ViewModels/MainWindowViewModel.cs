@@ -74,10 +74,7 @@
         private void SetTabsForPerformanceCharts()
         {
             var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
-            foreach (var algorithm in algorithmNames)
-            {
-                this.Items.Add(new PerformanceChartViewModel { DisplayName = algorithm });
-            }
+            algorithmNames.ForEach(name => this.Items.Add(new PerformanceChartViewModel { DisplayName = name }));
         }
 
         private async Task<TestResult> ExecuteTests()
