@@ -89,7 +89,7 @@
             var progressViewModel = new ProgressViewModel(iterations,  algorithmsCount);
             await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
 
-            var algorithmTest = new AlgorithmTest(iterations);
+            var algorithmTest = new AlgorithmTest(iterations, algorithmsCount);
             return await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
         }
 

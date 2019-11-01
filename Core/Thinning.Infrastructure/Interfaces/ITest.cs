@@ -6,6 +6,6 @@
 
     public interface ITest
     {
-        TestResult Run(int iterations, string imageFilepath, IProgress<int> progress, CancellationToken cancellationToken);
+        TestResult Run(int iterations, int algorithmsCount, string imageFilepath, IProgress<int> progress, CancellationToken cancellationToken);
     }
 }

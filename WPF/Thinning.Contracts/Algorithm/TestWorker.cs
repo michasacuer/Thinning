@@ -33,7 +33,7 @@
             return bitmap;
         }
 
-        public byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out int stride)
+        public byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, int algorithmsCount, out int stride)
         {
             var bitmapData = bitmap.LockBits(
                 new Rectangle(0, 0, bitmap.Width, bitmap.Height),
@@ -41,9 +41,9 @@
                 bitmap.PixelFormat);
 
             int pixelsCount = bitmapData.Stride * bitmap.Height;
-            byte[][] testSamples = new byte[iterations * 3][];
+            byte[][] testSamples = new byte[iterations * algorithmsCount][];
 
-            for (int i = 0; i < iterations * 3; i++)
+            for (int i = 0; i < iterations * algorithmsCount; i++)
             {
                 testSamples[i] = new byte[pixelsCount];
                 Marshal.Copy(bitmapData.Scan0, testSamples[i], 0, pixelsCount);

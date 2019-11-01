@@ -13,9 +13,12 @@
     {
         private readonly int algorithmIterations;
 
-        public AlgorithmTest(int algorithmIterations)
+        private readonly int algorithmsCount;
+
+        public AlgorithmTest(int algorithmIterations, int algorithmsCount)
         {
             this.algorithmIterations = algorithmIterations;
+            this.algorithmsCount = algorithmsCount;
         }
 
         public async Task<TestResult> ExecuteAsync(string imageFilepath, ProgressViewModel progressViewModel)
@@ -51,6 +54,7 @@
                 var testResult = await Task.Run(
                     () => test.Run(
                         this.algorithmIterations,
+                        this.algorithmsCount,
                         imageFilepath,
                         progress,
                         progressViewModel.CancellationToken.Token), progressViewModel.CancellationToken.Token);

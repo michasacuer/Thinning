@@ -9,7 +9,7 @@
     {
         Bitmap PrepareBitmapToTestRun(Bitmap bitmap);
 
-        byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out int stride);
+        byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, int algorithmsCount, out int stride);
 
         TestResult RunAllAlgorithmsTestInterations(
             Bitmap bitmap,
