@@ -8,16 +8,18 @@
     using System.Threading;
     using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
-    using Thinning.Infrastructure.Interfaces.Algorithms;
     using Thinning.Infrastructure.Models;
 
     public class TestWorker : ITestWorker
     {
         private readonly List<IAlgorithm> algorithms;
 
-        public TestWorker(IK3M k3M, IKMM kMM, IZhangSuen zhangSuen)
+        private readonly IApplicationSetup applicationSetup;
+
+        public TestWorker(IApplicationSetup applicationSetup)
         {
-            this.algorithms = new List<IAlgorithm>(new IAlgorithm[] { k3M, kMM, zhangSuen });
+            this.applicationSetup = applicationSetup;
+            this.algorithms = this.applicationSetup.GetRegisteredAlgorithmInstances();
         }
 
         public Bitmap PrepareBitmapToTestRun(Bitmap bitmap)

@@ -5,5 +5,7 @@
     public interface IApplicationSetup
     {
         List<string> GetRegisteredAlgorithmNames();
+
+        List<IAlgorithm> GetRegisteredAlgorithmInstances();
     }
 }

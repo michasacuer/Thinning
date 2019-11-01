@@ -1,9 +1,7 @@
 ﻿namespace Thinning.UI.ViewModels
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Windows.Media;
     using Caliburn.Micro;
     using Thinning.Infrastructure;
