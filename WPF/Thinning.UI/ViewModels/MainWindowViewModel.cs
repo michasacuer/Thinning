@@ -1,6 +1,8 @@
 ﻿namespace Thinning.UI.ViewModels
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
     using System.Windows.Media;
     using Caliburn.Micro;
@@ -27,6 +29,8 @@
             this.windowManager = windowManager;
 
             var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
+            this.Images = new ObservableCollection<Tuple<string, ImageSource>>();
+
             foreach (var algorithm in algorithmNames)
             {
                 this.Items.Add(new PerformanceChartViewModel { DisplayName = algorithm });
@@ -38,11 +42,7 @@
 
         public string BaseImageUrl { get; set; }
 
-        public ImageSource K3MAlgorithmResult { get; set; }
-
-        public ImageSource KMMAlgorithmResult { get; set; }
-
-        public ImageSource ZhangSuenAlgorithmResult { get; set; }
+        public ObservableCollection<Tuple<string, ImageSource>> Images { get; set; }
 
         public bool IsButtonsEnabled { get; set; } = true;
 
@@ -76,14 +76,19 @@
             {
                 var conversion = new ImageConversion();
 
-                this.K3MAlgorithmResult = conversion.BitmapToBitmapImage(testResult.K3MBitmapResult);
-                this.NotifyOfPropertyChange(() => this.K3MAlgorithmResult);
+                //this.K3MAlgorithmResult = conversion.BitmapToBitmapImage(testResult.K3MBitmapResult);
+                //this.NotifyOfPropertyChange(() => this.K3MAlgorithmResult);
+                //
+                //this.KMMAlgorithmResult = conversion.BitmapToBitmapImage(testResult.KMMBitmapResult);
+                //this.NotifyOfPropertyChange(() => this.KMMAlgorithmResult);
+                //
+                //this.ZhangSuenAlgorithmResult = conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult);
+                //this.NotifyOfPropertyChange(() => this.ZhangSuenAlgorithmResult);
 
-                this.KMMAlgorithmResult = conversion.BitmapToBitmapImage(testResult.KMMBitmapResult);
-                this.NotifyOfPropertyChange(() => this.KMMAlgorithmResult);
-
-                this.ZhangSuenAlgorithmResult = conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult);
-                this.NotifyOfPropertyChange(() => this.ZhangSuenAlgorithmResult);
+                this.Images.Add(Tuple.Create("ddd", (ImageSource)conversion.BitmapToBitmapImage(testResult.K3MBitmapResult)));
+                this.Images.Add(Tuple.Create("ddd2", (ImageSource)conversion.BitmapToBitmapImage(testResult.KMMBitmapResult)));
+                this.Images.Add(Tuple.Create("ddd3", (ImageSource)conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult)));
+                this.NotifyOfPropertyChange(() => this.Images);
 
                 this.Items[0] = new PerformanceChartViewModel(testResult.K3MResultTimes, "K3M");
                 this.Items[1] = new PerformanceChartViewModel(testResult.KMMResultTimes, "KMM");

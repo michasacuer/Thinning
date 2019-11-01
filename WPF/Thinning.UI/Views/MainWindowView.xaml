@@ -57,39 +57,28 @@
 
         <Image x:Name="MainImage" Source="{Binding BaseImageUrl}" Grid.Row="0" Grid.Column="0" Margin="10"/>
 
-        <UniformGrid Grid.Column="1">
-            <Grid Height="180" Width="180" Margin="10">
-                <Grid.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="{Binding K3MAlgorithmResult}" ViewboxUnits="RelativeToBoundingBox" 
-                        local:ViewBoxTracking.Source="{Binding ElementName=MainImage}" />
-                </Grid.Background>
-            </Grid>
-        </UniformGrid>
-
-        <UniformGrid Grid.Column="2">
-            <Grid Height="180" Width="180" Margin="10">
-                <Grid.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="{Binding KMMAlgorithmResult}" ViewboxUnits="RelativeToBoundingBox" 
-                        local:ViewBoxTracking.Source="{Binding ElementName=MainImage}" />
-                </Grid.Background>
-            </Grid>
-        </UniformGrid>
-
-        <UniformGrid Grid.Column="3">
-            <Grid Height="180" Width="180" Margin="10">
-                <Grid.Background>
-                    <ImageBrush Stretch="Uniform" ImageSource="{Binding ZhangSuenAlgorithmResult}" ViewboxUnits="RelativeToBoundingBox" 
-                        local:ViewBoxTracking.Source="{Binding ElementName=MainImage}" />
-                </Grid.Background>
-            </Grid>
-        </UniformGrid>
+        <ItemsControl x:Name="Images"  Grid.Column="1" Grid.ColumnSpan="3">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <UniformGrid Rows="1"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="180" Width="180" Margin="10">
+                        <TextBlock Margin="75, -30, 0, 0" Text="{Binding Item1}"/>
+                        <Grid.Background>
+                            <ImageBrush Stretch="Uniform" ImageSource="{Binding Item2}" 
+                                ViewboxUnits="RelativeToBoundingBox"    
+                                local:ViewBoxTracking.Source="{Binding ElementName=MainImage}" />
+                        </Grid.Background>
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
 
         <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="LoadImage" Grid.Row="3" Width="150" Content="Load image" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"></Button>
         <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="RunAlgorithms" Grid.Row="3" Width="150" Content="Run tests" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20"></Button>
-
-        <Label Grid.Column="1" Padding="10" HorizontalAlignment="Center">K3M</Label>
-        <Label Grid.Column="2" Padding="10" HorizontalAlignment="Center">KMM</Label>
-        <Label Grid.Column="3" Padding="10" HorizontalAlignment="Center">Zhang Suen</Label>
 
         <TabControl Style="{StaticResource MaterialDesignTabControl}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="Items">
             <TabControl.ItemTemplate>
