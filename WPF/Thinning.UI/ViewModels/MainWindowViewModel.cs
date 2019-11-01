@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using System.Windows.Media;
     using Caliburn.Micro;
     using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
+    using Thinning.Infrastructure.Models;
     using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
 
@@ -26,11 +28,7 @@
             this.applicationSetup = applicationSetup;
             this.windowManager = windowManager;
 
-            var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
-            foreach (var algorithm in algorithmNames)
-            {
-                this.Items.Add(new PerformanceChartViewModel { DisplayName = algorithm });
-            }
+            this.SetTabsForPerformanceCharts();
 
             this.HardwareInfo = this.cardContent.GetHardwareInfo();
             this.NotifyOfPropertyChange(() => this.HardwareInfo);
@@ -62,33 +60,52 @@
             this.IsButtonsEnabled = false;
             this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
 
-            var progressViewModel = new ProgressViewModel();
-            await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
-
-            var algorithmTest = new AlgorithmTest();
-            var testResult = await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
+            var testResult = await this.ExecuteTests();
 
             if (testResult != null)
             {
-                var conversion = new ImageConversion();
-                int algorithmCount = 0;
-
-                foreach (var timesList in testResult.ResultTimes)
-                {
-                    this.Items[algorithmCount] = new PerformanceChartViewModel(timesList, this.Items[algorithmCount].DisplayName);
-                    this.Images.Add(Tuple.Create(
-                        this.Items[algorithmCount].DisplayName,
-                        (ImageSource)conversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount])));
-
-                    algorithmCount++;
-                }
-
-                this.NotifyOfPropertyChange(() => this.Images);
-                this.NotifyOfPropertyChange(() => this.Items);
+                this.AttachResultsToAlgorithms(testResult);
             }
 
             this.IsButtonsEnabled = true;
             this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
+        }
+
+        private void SetTabsForPerformanceCharts()
+        {
+            var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
+            foreach (var algorithm in algorithmNames)
+            {
+                this.Items.Add(new PerformanceChartViewModel { DisplayName = algorithm });
+            }
+        }
+
+        private async Task<TestResult> ExecuteTests()
+        {
+            var progressViewModel = new ProgressViewModel();
+            await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
+
+            var algorithmTest = new AlgorithmTest();
+            return await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
+        }
+
+        private void AttachResultsToAlgorithms(TestResult testResult)
+        {
+            var conversion = new ImageConversion();
+            int algorithmCount = 0;
+
+            foreach (var timesList in testResult.ResultTimes)
+            {
+                this.Items[algorithmCount] = new PerformanceChartViewModel(timesList, this.Items[algorithmCount].DisplayName);
+                this.Images.Add(Tuple.Create(
+                    this.Items[algorithmCount].DisplayName,
+                    (ImageSource)conversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount])));
+
+                algorithmCount++;
+            }
+
+            this.NotifyOfPropertyChange(() => this.Images);
+            this.NotifyOfPropertyChange(() => this.Items);
         }
     }
 }
