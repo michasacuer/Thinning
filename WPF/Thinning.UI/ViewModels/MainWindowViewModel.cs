@@ -1,8 +1,11 @@
 ﻿namespace Thinning.UI.ViewModels
 {
+    using System;
+    using System.Linq;
     using System.Windows.Media;
     using Caliburn.Micro;
     using Thinning.Infrastructure;
+    using Thinning.Infrastructure.Interfaces;
     using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
 
@@ -10,16 +13,24 @@
     {
         private ICardContent cardContent;
 
+        private IApplicationSetup applicationSetup;
+
         private IWindowManager windowManager;
 
-        public MainWindowViewModel(ICardContent cardContent, IWindowManager windowManager)
+        public MainWindowViewModel(
+            ICardContent cardContent,
+            IApplicationSetup applicationSetup,
+            IWindowManager windowManager)
         {
             this.cardContent = cardContent;
+            this.applicationSetup = applicationSetup;
             this.windowManager = windowManager;
 
-            this.Items.Add(new PerformanceChartViewModel { DisplayName = "K3M" });
-            this.Items.Add(new PerformanceChartViewModel { DisplayName = "KMM" });
-            this.Items.Add(new PerformanceChartViewModel { DisplayName = "Zhang Suen" });
+            var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
+            foreach (var algorithm in algorithmNames)
+            {
+                this.Items.Add(new PerformanceChartViewModel { DisplayName = algorithm });
+            }
 
             this.HardwareInfo = this.cardContent.GetHardwareInfo();
             this.NotifyOfPropertyChange(() => this.HardwareInfo);

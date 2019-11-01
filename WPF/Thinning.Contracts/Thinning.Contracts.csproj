@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationSetup.cs" />
     <Compile Include="Algorithm\Test.cs" />
     <Compile Include="Algorithm\TestWorker.cs" />
     <Compile Include="ContainerConfig.cs" />
