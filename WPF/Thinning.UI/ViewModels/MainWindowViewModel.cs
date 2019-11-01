@@ -29,8 +29,6 @@
             this.windowManager = windowManager;
 
             var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
-            this.Images = new ObservableCollection<Tuple<string, ImageSource>>();
-
             foreach (var algorithm in algorithmNames)
             {
                 this.Items.Add(new PerformanceChartViewModel { DisplayName = algorithm });
@@ -42,7 +40,7 @@
 
         public string BaseImageUrl { get; set; }
 
-        public ObservableCollection<Tuple<string, ImageSource>> Images { get; set; }
+        public ObservableCollection<Tuple<string, ImageSource>> Images { get; set; } = new ObservableCollection<Tuple<string, ImageSource>>();
 
         public bool IsButtonsEnabled { get; set; } = true;
 
@@ -75,24 +73,19 @@
             if (testResult != null)
             {
                 var conversion = new ImageConversion();
+                int algorithmCount = 0;
 
-                //this.K3MAlgorithmResult = conversion.BitmapToBitmapImage(testResult.K3MBitmapResult);
-                //this.NotifyOfPropertyChange(() => this.K3MAlgorithmResult);
-                //
-                //this.KMMAlgorithmResult = conversion.BitmapToBitmapImage(testResult.KMMBitmapResult);
-                //this.NotifyOfPropertyChange(() => this.KMMAlgorithmResult);
-                //
-                //this.ZhangSuenAlgorithmResult = conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult);
-                //this.NotifyOfPropertyChange(() => this.ZhangSuenAlgorithmResult);
+                foreach (var timesList in testResult.ResultTimes)
+                {
+                    this.Items[algorithmCount] = new PerformanceChartViewModel(timesList, this.Items[algorithmCount].DisplayName);
+                    this.Images.Add(Tuple.Create(
+                        this.Items[algorithmCount].DisplayName,
+                        (ImageSource)conversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount])));
 
-                this.Images.Add(Tuple.Create("ddd", (ImageSource)conversion.BitmapToBitmapImage(testResult.K3MBitmapResult)));
-                this.Images.Add(Tuple.Create("ddd2", (ImageSource)conversion.BitmapToBitmapImage(testResult.KMMBitmapResult)));
-                this.Images.Add(Tuple.Create("ddd3", (ImageSource)conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult)));
+                    algorithmCount++;
+                }
+
                 this.NotifyOfPropertyChange(() => this.Images);
-
-                this.Items[0] = new PerformanceChartViewModel(testResult.K3MResultTimes, "K3M");
-                this.Items[1] = new PerformanceChartViewModel(testResult.KMMResultTimes, "KMM");
-                this.Items[2] = new PerformanceChartViewModel(testResult.ZhangSuenResultTimes, "Zhang Suen");
                 this.NotifyOfPropertyChange(() => this.Items);
             }
 

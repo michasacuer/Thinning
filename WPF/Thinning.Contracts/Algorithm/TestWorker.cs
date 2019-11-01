@@ -61,9 +61,7 @@
             IProgress<int> progress,
             CancellationToken cancellationToken)
         {
-            var k3MResultTimes = new List<double>();
-            var kMMResultTimes = new List<double>();
-            var zhangSuenResultTimes = new List<double>();
+            var resultTimes = new List<List<double>>();
 
             int sample = 0;
             int progressValue = 1;
@@ -71,6 +69,8 @@
 
             foreach (var algorithm in this.algorithms)
             {
+                resultTimes.Add(new List<double>());
+
                 for (int i = 0; i < iterations; i++)
                 {
                     if (cancellationToken.IsCancellationRequested)
@@ -80,19 +80,7 @@
 
                     double executionTime;
                     testSamples[sample] = algorithm.Execute(testSamples[sample], stride, bitmap.Height, bitmap.Width, out executionTime);
-
-                    switch (whichAlgorithm)
-                    {
-                        case 0:
-                            k3MResultTimes.Add(executionTime);
-                            break;
-                        case 1:
-                            kMMResultTimes.Add(executionTime);
-                            break;
-                        case 2:
-                            zhangSuenResultTimes.Add(executionTime);
-                            break;
-                    }
+                    resultTimes[whichAlgorithm].Add(executionTime);
 
                     sample++;
                     progress.Report(progressValue++);
@@ -103,47 +91,37 @@
 
             return new TestResult
             {
-                K3MResultTimes = k3MResultTimes,
-                KMMResultTimes = kMMResultTimes,
-                ZhangSuenResultTimes = zhangSuenResultTimes,
+                ResultTimes = resultTimes,
             };
         }
 
-        public TestResult ByteArraysToBitmapResults(byte[][] researchSamples, Bitmap bitmap)
+        public TestResult ByteArraysToBitmapResults(TestResult resultTimes, int iterations, byte[][] researchSamples, Bitmap bitmap)
         {
-            var k3MResultBitmap = new Bitmap(bitmap.Width, bitmap.Height);
-            var kMMResultBitmap = new Bitmap(bitmap.Width, bitmap.Height);
-            var zhangSuenResultBitmap = new Bitmap(bitmap.Width, bitmap.Height);
+            var resultBitmaps = new List<Bitmap>();
+            foreach (var timesList in resultTimes.ResultTimes)
+            {
+                resultBitmaps.Add(new Bitmap(bitmap.Width, bitmap.Height));
+            }
 
-            BitmapData k3MBmpData = k3MResultBitmap.LockBits(
-               new Rectangle(0, 0, k3MResultBitmap.Width, k3MResultBitmap.Height),
-               ImageLockMode.ReadWrite,
-               bitmap.PixelFormat);
+            var sample = 0;
 
-            Marshal.Copy(researchSamples[1], 0, k3MBmpData.Scan0, researchSamples[1].Length);
-            k3MResultBitmap.UnlockBits(k3MBmpData);
+            foreach (var bmp in resultBitmaps)
+            {
+                var bitmapData = bmp.LockBits(
+                    new Rectangle(0, 0, bmp.Width, bmp.Height),
+                    ImageLockMode.ReadWrite,
+                    bitmap.PixelFormat);
 
-            BitmapData kMMBmpData = kMMResultBitmap.LockBits(
-                new Rectangle(0, 0, kMMResultBitmap.Width, kMMResultBitmap.Height),
-                ImageLockMode.ReadWrite,
-                bitmap.PixelFormat);
+                Marshal.Copy(researchSamples[sample], 0, bitmapData.Scan0, researchSamples[sample].Length);
+                bmp.UnlockBits(bitmapData);
 
-            Marshal.Copy(researchSamples[21], 0, kMMBmpData.Scan0, researchSamples[21].Length);
-            kMMResultBitmap.UnlockBits(kMMBmpData);
-
-            BitmapData zhangSuenBmpData = zhangSuenResultBitmap.LockBits(
-                new Rectangle(0, 0, zhangSuenResultBitmap.Width, zhangSuenResultBitmap.Height),
-                ImageLockMode.ReadWrite,
-                bitmap.PixelFormat);
-
-            Marshal.Copy(researchSamples[41], 0, zhangSuenBmpData.Scan0, researchSamples[41].Length);
-            zhangSuenResultBitmap.UnlockBits(zhangSuenBmpData);
+                sample += iterations;
+            }
 
             return new TestResult
             {
-                K3MBitmapResult = k3MResultBitmap,
-                KMMBitmapResult = kMMResultBitmap,
-                ZhangSuenBitmapResult = zhangSuenResultBitmap,
+                ResultTimes = resultTimes.ResultTimes,
+                ResultBitmaps = resultBitmaps,
             };
         }
     }

@@ -66,7 +66,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="180" Width="180" Margin="10">
-                        <TextBlock Margin="75, -30, 0, 0" Text="{Binding Item1}"/>
+                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-30" Text="{Binding Item1}"/>
                         <Grid.Background>
                             <ImageBrush Stretch="Uniform" ImageSource="{Binding Item2}" 
                                 ViewboxUnits="RelativeToBoundingBox"    

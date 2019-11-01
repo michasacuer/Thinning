@@ -26,9 +26,9 @@
 
             if (timesTestResult != null)
             {
-                var bitmapsTestResult = this.worker.ByteArraysToBitmapResults(testSamples, bitmap);
+                var testResult = this.worker.ByteArraysToBitmapResults(timesTestResult, iterations,  testSamples, bitmap);
 
-                return new TestResult(timesTestResult, bitmapsTestResult);
+                return testResult;
             }
             else
             {

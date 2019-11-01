@@ -19,6 +19,6 @@
             IProgress<int> progress,
             CancellationToken cancellationToken);
 
-        TestResult ByteArraysToBitmapResults(byte[][] testSamples, Bitmap bitmap);
+        TestResult ByteArraysToBitmapResults(TestResult resultTimes, int iterations, byte[][] testSamples, Bitmap bitmap);
     }
 }
