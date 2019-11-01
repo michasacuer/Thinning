@@ -84,8 +84,9 @@
         private async Task<TestResult> ExecuteTests()
         {
             int iterations = this.SelectedIterationsCount;
+            int algorithmsCount = this.Items.Count;
 
-            var progressViewModel = new ProgressViewModel(iterations,  this.Items.Count);
+            var progressViewModel = new ProgressViewModel(iterations,  algorithmsCount);
             await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
 
             var algorithmTest = new AlgorithmTest(iterations);
