@@ -16,19 +16,21 @@
 
         private readonly IApplicationSetup applicationSetup;
 
-        public TestWorker(IApplicationSetup applicationSetup)
+        private readonly IImageConversion imageConversion;
+
+        public TestWorker(IApplicationSetup applicationSetup, IImageConversion imageConversion)
         {
             this.applicationSetup = applicationSetup;
             this.algorithms = this.applicationSetup.GetRegisteredAlgorithmInstances();
+            this.imageConversion = imageConversion;
         }
 
         public Bitmap PrepareBitmapToTestRun(Bitmap bitmap)
         {
             Thread.Sleep(500);
 
-            var conversion = new ImageConversion();
-            bitmap = conversion.Binarize(bitmap);
-            bitmap = conversion.Create8bppGreyscaleImage(bitmap);
+            bitmap = this.imageConversion.Binarize(bitmap);
+            bitmap = this.imageConversion.Create8bppGreyscaleImage(bitmap);
 
             return bitmap;
         }

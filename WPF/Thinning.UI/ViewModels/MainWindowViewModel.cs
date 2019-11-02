@@ -14,20 +14,32 @@
 
     public class MainWindowViewModel : Conductor<IScreen>.Collection.AllActive
     {
-        private ICardContent cardContent;
+        private readonly ICardContent cardContent;
 
-        private IApplicationSetup applicationSetup;
+        private readonly IApplicationSetup applicationSetup;
 
-        private IWindowManager windowManager;
+        private readonly IFileDialog fileDialog;
+
+        private readonly IAlgorithmTest algorithmTest;
+
+        private readonly IWindowManager windowManager;
+
+        private readonly IImageConversion imageConversion;
 
         public MainWindowViewModel(
             ICardContent cardContent,
             IApplicationSetup applicationSetup,
-            IWindowManager windowManager)
+            IWindowManager windowManager,
+            IAlgorithmTest algorithmTest,
+            IFileDialog fileDialog,
+            IImageConversion imageConversion)
         {
             this.cardContent = cardContent;
             this.applicationSetup = applicationSetup;
             this.windowManager = windowManager;
+            this.fileDialog = fileDialog;
+            this.algorithmTest = algorithmTest;
+            this.imageConversion = imageConversion;
 
             this.SetTabsForPerformanceCharts();
 
@@ -51,9 +63,7 @@
 
         public void LoadImage()
         {
-            var fileDialog = new FileDialog();
-
-            this.BaseImageUrl = fileDialog.GetImageFilepath();
+            this.BaseImageUrl = this.fileDialog.GetImageFilepath();
             this.NotifyOfPropertyChange(() => this.BaseImageUrl);
 
             this.ImageInfo = this.cardContent.GetImageInfo(this.BaseImageUrl);
@@ -89,13 +99,11 @@
             var progressViewModel = new ProgressViewModel(iterations,  algorithmsCount);
             await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
 
-            var algorithmTest = new AlgorithmTest(iterations, algorithmsCount);
-            return await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
+            return await this.algorithmTest.ExecuteAsync(iterations, algorithmsCount, this.BaseImageUrl, progressViewModel);
         }
 
         private void AttachResultsToAlgorithms(TestResult testResult)
         {
-            var conversion = new ImageConversion();
             int algorithmCount = 0;
 
             this.Images = new ObservableCollection<Tuple<string, ImageSource>>();
@@ -105,7 +113,7 @@
                 this.Items[algorithmCount] = new PerformanceChartViewModel(timesList, this.Items[algorithmCount].DisplayName);
                 this.Images.Add(Tuple.Create(
                     this.Items[algorithmCount].DisplayName,
-                    (ImageSource)conversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount])));
+                    (ImageSource)this.imageConversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount])));
 
                 algorithmCount++;
             }

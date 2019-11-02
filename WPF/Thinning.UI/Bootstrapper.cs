@@ -5,6 +5,7 @@
     using System.Windows;
     using Caliburn.Micro;
     using Thinning.Contracts;
+    using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
@@ -34,6 +35,9 @@
 
             this.simpleContainer.PerRequest<ICardContent, CardContent>();
             this.simpleContainer.PerRequest<IApplicationSetup, ApplicationSetup>();
+            this.simpleContainer.PerRequest<IAlgorithmTest, AlgorithmTest>();
+            this.simpleContainer.PerRequest<IFileDialog, FileDialog>();
+            this.simpleContainer.PerRequest<IImageConversion, ImageConversion>();
 
             base.Configure();
         }

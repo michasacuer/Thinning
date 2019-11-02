@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IApplicationSetup.cs" />
+    <Compile Include="Interfaces\IImageConversion.cs" />
     <Compile Include="SystemInfo.cs" />
     <Compile Include="Consts\K3MConsts.cs" />
     <Compile Include="Consts\KMMConsts.cs" />

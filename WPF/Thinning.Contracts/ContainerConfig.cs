@@ -2,6 +2,7 @@
 {
     using Autofac;
     using Thinning.Contracts.Algorithm;
+    using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
 
     public class ContainerConfig
@@ -13,6 +14,7 @@
             builder.RegisterType<Test>().As<ITest>();
             builder.RegisterType<TestWorker>().As<ITestWorker>();
             builder.RegisterType<ApplicationSetup>().As<IApplicationSetup>();
+            builder.RegisterType<ImageConversion>().As<IImageConversion>();
 
             return builder.Build();
         }

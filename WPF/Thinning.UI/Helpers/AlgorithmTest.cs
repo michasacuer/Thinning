@@ -7,21 +7,16 @@
     using Thinning.Contracts;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
+    using Thinning.UI.Helpers.Interfaces;
     using Thinning.UI.ViewModels;
 
-    public class AlgorithmTest
+    public class AlgorithmTest : IAlgorithmTest
     {
-        private readonly int algorithmIterations;
-
-        private readonly int algorithmsCount;
-
-        public AlgorithmTest(int algorithmIterations, int algorithmsCount)
-        {
-            this.algorithmIterations = algorithmIterations;
-            this.algorithmsCount = algorithmsCount;
-        }
-
-        public async Task<TestResult> ExecuteAsync(string imageFilepath, ProgressViewModel progressViewModel)
+        public async Task<TestResult> ExecuteAsync(
+            int algorithmIterations,
+            int algorithmsCount,
+            string imageFilepath,
+            ProgressViewModel progressViewModel)
         {
             var container = ContainerConfig.Configure();
 
@@ -35,7 +30,7 @@
 
                 IProgress<int> progress = new Progress<int>((progressValue) =>
                 {
-                    if (i < this.algorithmIterations)
+                    if (i < algorithmIterations)
                     {
                         progressViewModel.TaskInfo = $"Algorithm number {whichAlgorithm} executing...";
                         i++;
@@ -53,8 +48,8 @@
 
                 var testResult = await Task.Run(
                     () => test.Run(
-                        this.algorithmIterations,
-                        this.algorithmsCount,
+                        algorithmIterations,
+                        algorithmsCount,
                         imageFilepath,
                         progress,
                         progressViewModel.CancellationToken.Token), progressViewModel.CancellationToken.Token);
