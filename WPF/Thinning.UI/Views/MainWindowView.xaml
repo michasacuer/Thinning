@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:Thinning.UI.Views"
         xmlns:controls="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
         mc:Ignorable="d"
-        Title="Thinning" Height="700" Width="1000"
+        Title="Thinning" Height="700" Width="1020"
         ResizeMode="NoResize"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -77,25 +77,27 @@
 
         <Image x:Name="MainImage" Source="{Binding BaseImageUrl}" Grid.Row="0" Grid.Column="0" Margin="10"/>
 
-        <ItemsControl x:Name="Images"  Grid.Column="1" Grid.ColumnSpan="3">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="1"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="180" Width="180" Margin="10">
-                        <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-30" Text="{Binding Item1}"/>
-                        <Grid.Background>
-                            <ImageBrush Stretch="Uniform" ImageSource="{Binding Item2}" 
+        <ScrollViewer Grid.Column="1" Grid.ColumnSpan="3" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+            <ItemsControl x:Name="Images"  Grid.Column="1" Grid.ColumnSpan="3">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="180" Width="180" Margin="10">
+                            <TextBlock VerticalAlignment="Top" HorizontalAlignment="Center" Margin="-30" Text="{Binding Item1}"/>
+                            <Grid.Background>
+                                <ImageBrush Stretch="Uniform" ImageSource="{Binding Item2}" 
                                 ViewboxUnits="RelativeToBoundingBox"    
                                 local:ViewBoxTracking.Source="{Binding ElementName=MainImage}" />
-                        </Grid.Background>
-                    </Grid>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+                            </Grid.Background>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
 
         <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="LoadImage" Grid.Row="3" Width="150" Content="Load image" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"></Button>
         <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="RunAlgorithms" Grid.Row="3" Width="150" Content="Run tests" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20"></Button>
