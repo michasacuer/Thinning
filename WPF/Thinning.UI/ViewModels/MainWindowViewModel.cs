@@ -9,6 +9,7 @@
     using Caliburn.Micro;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
+    using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
 
     public class MainWindowViewModel : Conductor<IScreen>.Collection.AllActive
@@ -48,7 +49,7 @@
 
         public string BaseImageUrl { get; set; }
 
-        public ObservableCollection<Tuple<string, ImageSource>> Images { get; set; }
+        public ObservableCollection<ImageLabelViewStructure> Images { get; set; }
 
         public bool IsButtonsEnabled { get; set; } = true;
 
@@ -112,16 +113,18 @@
 
         private void AttachResultsToAlgorithms(TestResult testResult)
         {
-            this.Images = new ObservableCollection<Tuple<string, ImageSource>>();
+            this.Images = new ObservableCollection<ImageLabelViewStructure>();
             double maxValue = this.GetMaxValueFromResultTimes(testResult.ResultTimes);
 
             int algorithmCount = 0;
             foreach (var timesList in testResult.ResultTimes)
             {
                 this.Items[algorithmCount] = new PerformanceChartViewModel(timesList, maxValue, this.Items[algorithmCount].DisplayName);
-                this.Images.Add(Tuple.Create(
-                    this.Items[algorithmCount].DisplayName,
-                    (ImageSource)this.imageConversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount])));
+                this.Images.Add(new ImageLabelViewStructure
+                {
+                    Image = this.imageConversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount]),
+                    Label = this.Items[algorithmCount].DisplayName,
+                });
 
                 algorithmCount++;
             }
@@ -135,12 +138,13 @@
             var topValues = new List<double>();
             foreach (var timesList in times)
             {
-                var sortedList = new List<double>(timesList);
-                sortedList.OrderByDescending(t => t);
-                topValues.Add(sortedList[0]);
+                var sortedList = new List<double>(timesList).OrderByDescending(t => t).ToList();
+                topValues.Add(sortedList.First());
             }
 
-            return topValues.OrderByDescending(t => t).First();
+            topValues = topValues.OrderByDescending(t => t).ToList();
+
+            return topValues.First();
         }
     }
 }

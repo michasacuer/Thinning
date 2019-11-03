@@ -89,6 +89,7 @@
     <Compile Include="Helpers\AlgorithmTest.cs" />
     <Compile Include="Helpers\CardContent.cs" />
     <Compile Include="Helpers\FileDialog.cs" />
+    <Compile Include="Helpers\ImageLabelModel.cs" />
     <Compile Include="Helpers\Interfaces\IAlgorithmTest.cs" />
     <Compile Include="Helpers\Interfaces\ICardContent.cs" />
     <Compile Include="Helpers\Interfaces\IFileDialog.cs" />
