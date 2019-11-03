@@ -3,11 +3,18 @@
     using System;
     using System.Drawing;
     using System.IO;
-    using Thinning.Contracts;
+    using Thinning.Infrastructure.Interfaces;
     using Thinning.UI.Helpers.Interfaces;
 
     public class CardContent : ICardContent
     {
+        private readonly IHardware hardware;
+
+        public CardContent(IHardware hardware)
+        {
+            this.hardware = hardware;
+        }
+
         public string GetImageInfo(string imageFilepath)
         {
             try
@@ -25,11 +32,6 @@
             }
         }
 
-        public string GetHardwareInfo()
-        {
-            var hardware = new Hardware();
-
-            return hardware.GetHardwareInfo();
-        }
+        public string GetHardwareInfo() => this.hardware.GetHardwareInfo();
     }
 }

@@ -38,6 +38,7 @@
             this.simpleContainer.PerRequest<IAlgorithmTest, AlgorithmTest>();
             this.simpleContainer.PerRequest<IFileDialog, FileDialog>();
             this.simpleContainer.PerRequest<IImageConversion, ImageConversion>();
+            this.simpleContainer.PerRequest<IHardware, Hardware>();
             this.simpleContainer.PerRequest<IMainWindowViewModelHelper, MainWindowViewModelHelper>();
 
             base.Configure();

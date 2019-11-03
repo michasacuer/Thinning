@@ -4,8 +4,9 @@
     using System.Collections.Generic;
     using System.Text;
     using Thinning.Infrastructure;
+    using Thinning.Infrastructure.Interfaces;
 
-    public class Hardware
+    public class Hardware : IHardware
     {
         public string GetHardwareInfo()
         {

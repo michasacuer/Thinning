@@ -56,8 +56,8 @@
                 this.mainWindowViewModel.ImageInfo = this.cardContent.GetImageInfo(this.mainWindowViewModel.BaseImageUrl);
                 this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.ImageInfo);
 
-                this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsRunButtonsEnabled);
                 this.mainWindowViewModel.IsRunButtonsEnabled = true;
+                this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsRunButtonsEnabled);
             }
         }
 
