@@ -30,14 +30,15 @@
             this.simpleContainer.Singleton<IWindowManager, WindowManager>();
             this.simpleContainer.Singleton<IEventAggregator, EventAggregator>();
 
-            this.simpleContainer.PerRequest<MainWindowViewModel, MainWindowViewModel>();
-            this.simpleContainer.PerRequest<PerformanceChartViewModel, PerformanceChartViewModel>();
+            this.simpleContainer.Singleton<MainWindowViewModel, MainWindowViewModel>();
+            this.simpleContainer.Singleton<PerformanceChartViewModel, PerformanceChartViewModel>();
 
             this.simpleContainer.PerRequest<ICardContent, CardContent>();
             this.simpleContainer.PerRequest<IApplicationSetup, ApplicationSetup>();
             this.simpleContainer.PerRequest<IAlgorithmTest, AlgorithmTest>();
             this.simpleContainer.PerRequest<IFileDialog, FileDialog>();
             this.simpleContainer.PerRequest<IImageConversion, ImageConversion>();
+            this.simpleContainer.PerRequest<IMainWindowViewModelHelper, MainWindowViewModelHelper>();
 
             base.Configure();
         }

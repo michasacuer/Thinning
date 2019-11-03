@@ -93,6 +93,8 @@
     <Compile Include="Helpers\Interfaces\IAlgorithmTest.cs" />
     <Compile Include="Helpers\Interfaces\ICardContent.cs" />
     <Compile Include="Helpers\Interfaces\IFileDialog.cs" />
+    <Compile Include="Helpers\Interfaces\IMainWindowViewModelHelper.cs" />
+    <Compile Include="Helpers\MainWindowViewModelHelper.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PerformanceChartViewModel.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />
