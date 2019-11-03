@@ -6,7 +6,6 @@
     using System.Drawing.Imaging;
     using System.Runtime.InteropServices;
     using System.Threading;
-    using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
 

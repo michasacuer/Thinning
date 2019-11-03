@@ -6,10 +6,8 @@
     using System.Threading.Tasks;
     using System.Windows.Media;
     using Caliburn.Micro;
-    using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
-    using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
 
     public class MainWindowViewModel : Conductor<IScreen>.Collection.AllActive
