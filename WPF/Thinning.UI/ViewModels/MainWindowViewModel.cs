@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Windows.Media;
     using Caliburn.Micro;
@@ -111,13 +112,13 @@
 
         private void AttachResultsToAlgorithms(TestResult testResult)
         {
-            int algorithmCount = 0;
-
             this.Images = new ObservableCollection<Tuple<string, ImageSource>>();
+            double maxValue = this.GetMaxValueFromResultTimes(testResult.ResultTimes);
 
+            int algorithmCount = 0;
             foreach (var timesList in testResult.ResultTimes)
             {
-                this.Items[algorithmCount] = new PerformanceChartViewModel(timesList, this.Items[algorithmCount].DisplayName);
+                this.Items[algorithmCount] = new PerformanceChartViewModel(timesList, maxValue, this.Items[algorithmCount].DisplayName);
                 this.Images.Add(Tuple.Create(
                     this.Items[algorithmCount].DisplayName,
                     (ImageSource)this.imageConversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount])));
@@ -127,6 +128,19 @@
 
             this.NotifyOfPropertyChange(() => this.Images);
             this.NotifyOfPropertyChange(() => this.Items);
+        }
+
+        private double GetMaxValueFromResultTimes(List<List<double>> times)
+        {
+            var topValues = new List<double>();
+            foreach (var timesList in times)
+            {
+                var sortedList = new List<double>(timesList);
+                sortedList.OrderByDescending(t => t);
+                topValues.Add(sortedList[0]);
+            }
+
+            return topValues.OrderByDescending(t => t).First();
         }
     }
 }

@@ -12,7 +12,7 @@
         {
         }
 
-        public PerformanceChartViewModel(List<double> values, string displayName)
+        public PerformanceChartViewModel(List<double> values, double maxValue, string displayName)
         {
             this.DisplayName = displayName;
 
@@ -36,6 +36,7 @@
 
             this.Labels = labels;
             this.Formatter = value => value.ToString("N");
+            this.MaxValue = maxValue;
         }
 
         public SeriesCollection SeriesCollection { get; set; }
@@ -43,5 +44,7 @@
         public string[] Labels { get; set; }
 
         public Func<double, string> Formatter { get; set; }
+
+        public double MaxValue { get; set; } = 0;
     }
 }
