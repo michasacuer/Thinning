@@ -10,7 +10,7 @@
     {
         private readonly IMainWindowViewModelHelper helper;
 
-        public MainWindowViewModel(IMainWindowViewModelHelper helper, IPerformanceChartViewModelHelper performanceChartHelper)
+        public MainWindowViewModel(IMainWindowViewModelHelper helper)
         {
             this.helper = helper;
 

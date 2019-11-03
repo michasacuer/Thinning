@@ -1,11 +1,7 @@
 ﻿namespace Thinning.Infrastructure.Interfaces
 {
     using System.Drawing;
-    using System.Drawing.Imaging;
-    using System.IO;
-    using System.Threading.Tasks;
     using System.Windows.Media.Imaging;
-    using Accord.Imaging.Filters;
 
     public interface IImageConversion
     {
