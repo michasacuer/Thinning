@@ -33,7 +33,7 @@
 
         public int SelectedIterationsCount { get; set; }
 
-        public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50 });
+        public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50, 70, 80 });
 
         public void LoadImage() => this.helper.LoadImage();
 
