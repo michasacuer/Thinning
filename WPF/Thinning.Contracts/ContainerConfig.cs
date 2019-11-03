@@ -2,6 +2,7 @@
 {
     using Autofac;
     using Thinning.Contracts.Algorithm;
+    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
 

@@ -1,4 +1,4 @@
-﻿namespace Thinning.Infrastructure.Interfaces
+﻿namespace Thinning.UI.Helpers.Interfaces
 {
     public interface IHardware
     {

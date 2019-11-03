@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Reflection;
     using Thinning.Algorithm;
+    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure.Interfaces;
 
     public class ApplicationSetup : IApplicationSetup

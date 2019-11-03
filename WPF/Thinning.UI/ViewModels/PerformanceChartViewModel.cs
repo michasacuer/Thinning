@@ -5,38 +5,38 @@
     using Caliburn.Micro;
     using LiveCharts;
     using LiveCharts.Wpf;
+    using Thinning.UI.Helpers.Interfaces;
 
     public class PerformanceChartViewModel : Screen
     {
+        private readonly IPerformanceChartViewModelHelper helper;
+
         public PerformanceChartViewModel()
         {
         }
 
-        public PerformanceChartViewModel(List<double> values, double maxValue, string displayName)
+        public PerformanceChartViewModel(
+            IPerformanceChartViewModelHelper helper,
+            List<double> values,
+            double maxValue,
+            string displayName)
         {
-            this.DisplayName = displayName;
+            this.helper = helper;
+            this.helper.SetReferenceToViewModel(this);
 
-            var testValues = new ChartValues<double>(values);
+            var times = new ChartValues<double>(values);
+            this.DisplayName = displayName;
 
             this.SeriesCollection = new SeriesCollection
             {
                 new ColumnSeries
                 {
                     Title = "Time (Ms)",
-                    Values = testValues,
+                    Values = times,
                 },
             };
 
-            var labels = new string[testValues.Count];
-
-            for (int i = 0; i < testValues.Count; i++)
-            {
-                labels[i] = $"Run {i + 1}";
-            }
-
-            this.Labels = labels;
-            this.Formatter = value => value.ToString("N");
-            this.MaxValue = maxValue;
+            this.helper.PrepareChart(times, maxValue);
         }
 
         public SeriesCollection SeriesCollection { get; set; }

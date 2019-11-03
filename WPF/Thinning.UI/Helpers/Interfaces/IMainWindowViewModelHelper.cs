@@ -2,10 +2,8 @@
 {
     using Thinning.UI.ViewModels;
 
-    public interface IMainWindowViewModelHelper
+    public interface IMainWindowViewModelHelper : IViewModel<MainWindowViewModel>
     {
-        void SetReferenceToMainWindow(MainWindowViewModel mainWindowViewModel);
-
         void SetHardwareInfo();
 
         void SetTabsForPerformanceCharts();

@@ -5,6 +5,7 @@
     using System.Windows;
     using Caliburn.Micro;
     using Thinning.Contracts;
+    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.UI.Helpers;
@@ -39,7 +40,9 @@
             this.simpleContainer.PerRequest<IFileDialog, FileDialog>();
             this.simpleContainer.PerRequest<IImageConversion, ImageConversion>();
             this.simpleContainer.PerRequest<IHardware, Hardware>();
+            this.simpleContainer.PerRequest<ISystemInfo, SystemInfo>();
             this.simpleContainer.PerRequest<IMainWindowViewModelHelper, MainWindowViewModelHelper>();
+            this.simpleContainer.PerRequest<IPerformanceChartViewModelHelper, PerformanceChartViewModelHelper>();
 
             base.Configure();
         }

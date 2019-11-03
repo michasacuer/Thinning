@@ -10,11 +10,11 @@
     {
         private readonly IMainWindowViewModelHelper helper;
 
-        public MainWindowViewModel(IMainWindowViewModelHelper helper)
+        public MainWindowViewModel(IMainWindowViewModelHelper helper, IPerformanceChartViewModelHelper performanceChartHelper)
         {
             this.helper = helper;
 
-            this.helper.SetReferenceToMainWindow(this);
+            this.helper.SetReferenceToViewModel(this);
             this.helper.SetTabsForPerformanceCharts();
             this.helper.SetHardwareInfo();
         }

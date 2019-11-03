@@ -66,10 +66,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Interfaces\IApplicationSetup.cs" />
-    <Compile Include="Interfaces\IHardware.cs" />
     <Compile Include="Interfaces\IImageConversion.cs" />
-    <Compile Include="SystemInfo.cs" />
     <Compile Include="Consts\K3MConsts.cs" />
     <Compile Include="Consts\KMMConsts.cs" />
     <Compile Include="Consts\PixelValues.cs" />
@@ -77,8 +74,6 @@
     <Compile Include="Interfaces\IAlgorithm.cs" />
     <Compile Include="Interfaces\Algorithms\IK3M.cs" />
     <Compile Include="Interfaces\Algorithms\IKMM.cs" />
-    <Compile Include="Interfaces\ITest.cs" />
-    <Compile Include="Interfaces\ITestWorker.cs" />
     <Compile Include="Interfaces\Algorithms\IZhangSuen.cs" />
     <Compile Include="Models\TestResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

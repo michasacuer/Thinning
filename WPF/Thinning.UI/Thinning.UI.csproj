@@ -89,12 +89,17 @@
     <Compile Include="Helpers\AlgorithmTest.cs" />
     <Compile Include="Helpers\CardContent.cs" />
     <Compile Include="Helpers\FileDialog.cs" />
+    <Compile Include="Helpers\Hardware.cs" />
     <Compile Include="Helpers\ImageLabelModel.cs" />
     <Compile Include="Helpers\Interfaces\IAlgorithmTest.cs" />
     <Compile Include="Helpers\Interfaces\ICardContent.cs" />
     <Compile Include="Helpers\Interfaces\IFileDialog.cs" />
+    <Compile Include="Helpers\Interfaces\IHardware.cs" />
     <Compile Include="Helpers\Interfaces\IMainWindowViewModelHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IPerformanceChartViewModelHelper.cs" />
+    <Compile Include="Helpers\Interfaces\IViewModel.cs" />
     <Compile Include="Helpers\MainWindowViewModelHelper.cs" />
+    <Compile Include="Helpers\PerformanceChartViewModelHelper.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PerformanceChartViewModel.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />

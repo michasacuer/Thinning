@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Autofac;
     using Thinning.Contracts;
-    using Thinning.Infrastructure.Interfaces;
+    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure.Models;
     using Thinning.UI.Helpers.Interfaces;
     using Thinning.UI.ViewModels;

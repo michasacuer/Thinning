@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Caliburn.Micro;
+    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
     using Thinning.UI.Helpers.Interfaces;
@@ -24,6 +25,8 @@
 
         private readonly IImageConversion imageConversion;
 
+        private readonly IPerformanceChartViewModelHelper performanceChartHelper;
+
         private MainWindowViewModel mainWindowViewModel;
 
         public MainWindowViewModelHelper(
@@ -32,7 +35,8 @@
             IWindowManager windowManager,
             IAlgorithmTest algorithmTest,
             IFileDialog fileDialog,
-            IImageConversion imageConversion)
+            IImageConversion imageConversion,
+            IPerformanceChartViewModelHelper performanceChartHelper)
         {
             this.cardContent = cardContent;
             this.applicationSetup = applicationSetup;
@@ -40,9 +44,10 @@
             this.fileDialog = fileDialog;
             this.algorithmTest = algorithmTest;
             this.imageConversion = imageConversion;
+            this.performanceChartHelper = performanceChartHelper;
         }
 
-        public void SetReferenceToMainWindow(MainWindowViewModel mainWindowViewModel) =>
+        public void SetReferenceToViewModel(MainWindowViewModel mainWindowViewModel) =>
             this.mainWindowViewModel = mainWindowViewModel;
 
         public void LoadImage()
@@ -108,8 +113,12 @@
             int algorithmCount = 0;
             foreach (var timesList in testResult.ResultTimes)
             {
-                this.mainWindowViewModel.Items[algorithmCount] =
-                    new PerformanceChartViewModel(timesList, maxValue, this.mainWindowViewModel.Items[algorithmCount].DisplayName);
+                this.mainWindowViewModel.Items[algorithmCount] = new PerformanceChartViewModel(
+                    this.performanceChartHelper,
+                    timesList,
+                    maxValue,
+                    this.mainWindowViewModel.Items[algorithmCount].DisplayName);
+
                 this.mainWindowViewModel.Images.Add(new ImageLabelViewStructure
                 {
                     Image = this.imageConversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount]),
