@@ -44,7 +44,7 @@
             </TextBlock>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="100" Width="360" Margin="0, 0, 0, 57">
+        <materialDesign:Card Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Height="100" Width="360" Margin="0, 0, 0, 61">
             <TextBlock 
                 Margin="10"
                 FontSize="14"
