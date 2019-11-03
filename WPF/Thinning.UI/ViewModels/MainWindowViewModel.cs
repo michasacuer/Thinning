@@ -51,6 +51,8 @@
 
         public bool IsButtonsEnabled { get; set; } = true;
 
+        public bool IsRunButtonsEnabled { get; set; } = false;
+
         public string HardwareInfo { get; set; }
 
         public string ImageInfo { get; set; }
@@ -61,11 +63,18 @@
 
         public void LoadImage()
         {
-            this.BaseImageUrl = this.fileDialog.GetImageFilepath();
-            this.NotifyOfPropertyChange(() => this.BaseImageUrl);
+            string filepath = this.fileDialog.GetImageFilepath();
+            if (!filepath.Equals(string.Empty))
+            {
+                this.BaseImageUrl = filepath;
+                this.NotifyOfPropertyChange(() => this.BaseImageUrl);
 
-            this.ImageInfo = this.cardContent.GetImageInfo(this.BaseImageUrl);
-            this.NotifyOfPropertyChange(() => this.ImageInfo);
+                this.ImageInfo = this.cardContent.GetImageInfo(this.BaseImageUrl);
+                this.NotifyOfPropertyChange(() => this.ImageInfo);
+
+                this.IsRunButtonsEnabled = true;
+                this.NotifyOfPropertyChange(() => this.IsRunButtonsEnabled);
+            }
         }
 
         public async void RunAlgorithms()
