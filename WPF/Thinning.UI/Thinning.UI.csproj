@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Helpers\AlgorithmTest.cs" />
     <Compile Include="Helpers\CardContent.cs" />
+    <Compile Include="Helpers\Extensions\SimpleContainerExtension.cs" />
     <Compile Include="Helpers\FileDialog.cs" />
     <Compile Include="Helpers\Hardware.cs" />
     <Compile Include="Helpers\ImageLabelModel.cs" />
