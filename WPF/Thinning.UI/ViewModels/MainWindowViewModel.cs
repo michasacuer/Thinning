@@ -36,7 +36,9 @@
 
         public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50, 70, 80 });
 
-        public List<int> ZoomPicker { get; set; } = new List<int>(new int[] { 2, 3, 4, 5 });
+        public List<int> ZoomPicker { get; set; } = new List<int>(new int[] { 2, 3, 4, 5, 6 });
+
+        public string IterationsZoomCardContent { get; set; } = "Iterations:                                          Zoom:";
 
         public int SelectedZoomPicker
         {

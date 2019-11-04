@@ -59,7 +59,7 @@
             <TextBlock 
                 Margin="10"
                 FontSize="14"
-                Text="Iterations:                                    Zoom:"
+                Text="{Binding IterationsZoomCardContent}"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left" 
                 Style="{DynamicResource MaterialDesignTitleTextBlock}">
