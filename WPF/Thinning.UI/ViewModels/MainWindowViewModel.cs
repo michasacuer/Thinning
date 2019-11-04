@@ -5,6 +5,7 @@
     using Caliburn.Micro;
     using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
+    using Thinning.UI.Views;
 
     public class MainWindowViewModel : Conductor<IScreen>.Collection.AllActive
     {
@@ -31,9 +32,23 @@
 
         public string ImageInfo { get; set; }
 
-        public int SelectedIterationsCount { get; set; }
+        public int SelectedIterationsCount { get; set; } = 10;
 
         public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50, 70, 80 });
+
+        public List<int> ZoomPicker { get; set; } = new List<int>(new int[] { 2, 3, 4, 5 });
+
+        private int selectedZoomPicker = 2;
+
+        public int SelectedZoomPicker
+        {
+            get => selectedZoomPicker;
+            set
+            {
+                selectedZoomPicker = value;
+                ViewBoxTracking.ZoomFactor = value;
+            }
+        }
 
         public void LoadImage() => this.helper.LoadImage();
 

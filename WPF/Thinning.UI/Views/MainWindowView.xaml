@@ -59,7 +59,7 @@
             <TextBlock 
                 Margin="10"
                 FontSize="14"
-                Text="Iterations:"
+                Text="Iterations:                                    Zoom:"
                 VerticalAlignment="Center"
                 HorizontalAlignment="Left" 
                 Style="{DynamicResource MaterialDesignTitleTextBlock}">
@@ -69,6 +69,15 @@
         <ComboBox 
             x:Name="IterationsList"
             SelectedValue="{Binding Path=SelectedIterationsCount, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            Width="50" 
+            FontSize="14" 
+            Grid.Row="1" 
+            Margin="-120, 0, 0, -240">
+        </ComboBox>
+
+        <ComboBox 
+            x:Name="ZoomPicker"
+            SelectedValue="{Binding Path=SelectedZoomPicker, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
             Width="50" 
             FontSize="14" 
             Grid.Row="1" 

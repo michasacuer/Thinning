@@ -13,7 +13,7 @@
 
         public static UIElement GetSource(TileBrush brush) => (UIElement)brush.GetValue(SourceProperty);
 
-        private const int ZoomFactor = 3;
+        public static int ZoomFactor = 3;
 
         private static void SourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs ea)
         {
