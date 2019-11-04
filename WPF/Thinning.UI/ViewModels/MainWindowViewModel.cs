@@ -38,16 +38,10 @@
 
         public List<int> ZoomPicker { get; set; } = new List<int>(new int[] { 2, 3, 4, 5 });
 
-        private int selectedZoomPicker = 2;
-
         public int SelectedZoomPicker
         {
-            get => selectedZoomPicker;
-            set
-            {
-                selectedZoomPicker = value;
-                ViewBoxTracking.ZoomFactor = value;
-            }
+            get => ViewBoxTracking.ZoomFactor;
+            set => ViewBoxTracking.ZoomFactor = value;
         }
 
         public void LoadImage() => this.helper.LoadImage();
