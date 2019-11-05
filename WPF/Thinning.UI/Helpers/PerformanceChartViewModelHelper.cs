@@ -8,10 +8,8 @@
     {
         private PerformanceChartViewModel performanceChartViewModel;
 
-        public void SetReferenceToViewModel(PerformanceChartViewModel performanceChartViewModel)
-        {
+        public void SetReferenceToViewModel(PerformanceChartViewModel performanceChartViewModel) =>
             this.performanceChartViewModel = performanceChartViewModel;
-        }
 
         public void PrepareChart(ChartValues<double> times, double maxValue)
         {
