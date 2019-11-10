@@ -1,9 +1,10 @@
-﻿namespace Thinning.Infrastructure
+﻿namespace Thinning.Contracts
 {
     using System.Management;
     using Microsoft.VisualBasic.Devices;
+    using Thinning.Contracts.Interfaces;
 
-    public class SystemInfo
+    public class SystemInfo : ISystemInfo
     {
         public string GetOperativeSystemInfo()
         {

@@ -5,13 +5,18 @@
     using System.Threading.Tasks;
     using Autofac;
     using Thinning.Contracts;
-    using Thinning.Infrastructure.Interfaces;
+    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure.Models;
+    using Thinning.UI.Helpers.Interfaces;
     using Thinning.UI.ViewModels;
 
-    public class AlgorithmTest
+    public class AlgorithmTest : IAlgorithmTest
     {
-        public async Task<TestResult> ExecuteAsync(string imageFilepath, ProgressViewModel progressViewModel)
+        public async Task<TestResult> ExecuteAsync(
+            int algorithmIterations,
+            int algorithmsCount,
+            string imageFilepath,
+            ProgressViewModel progressViewModel)
         {
             var container = ContainerConfig.Configure();
 
@@ -20,31 +25,34 @@
                 var test = scope.Resolve<ITest>();
                 progressViewModel.CancellationToken = new CancellationTokenSource();
 
-                IProgress<int> progress = new Progress<int>((i) =>
+                int i = 0;
+                int whichAlgorithm = 1;
+
+                IProgress<int> progress = new Progress<int>((progressValue) =>
                 {
-                    if (i <= 20)
+                    if (i < algorithmIterations)
                     {
-                        progressViewModel.TaskInfo = "K3M Executing";
-                    }
-                    else if (i > 20 && i < 40)
-                    {
-                        progressViewModel.TaskInfo = "KMM Executing";
+                        progressViewModel.TaskInfo = $"Algorithm number {whichAlgorithm} executing...";
+                        i++;
                     }
                     else
                     {
-                        progressViewModel.TaskInfo = "ZhagnSuen Executing";
+                        i = 0;
+                        whichAlgorithm++;
                     }
 
-                    progressViewModel.ProgressValue = i;
+                    progressViewModel.ProgressValue = progressValue;
                     progressViewModel.NotifyOfPropertyChange(() => progressViewModel.ProgressValue);
                     progressViewModel.NotifyOfPropertyChange(() => progressViewModel.TaskInfo);
                 });
 
                 var testResult = await Task.Run(
                     () => test.Run(
-                    imageFilepath,
-                    progress,
-                    progressViewModel.CancellationToken.Token), progressViewModel.CancellationToken.Token);
+                        algorithmIterations,
+                        algorithmsCount,
+                        imageFilepath,
+                        progress,
+                        progressViewModel.CancellationToken.Token), progressViewModel.CancellationToken.Token);
 
                 await progressViewModel.TryCloseAsync();
 

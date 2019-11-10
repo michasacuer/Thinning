@@ -18,8 +18,8 @@
         FontFamily="{DynamicResource MaterialDesignFont}"
         WindowStartupLocation="CenterScreen">
     <Grid Margin="20">
-        <ProgressBar Minimum="0" Maximum="60" Value="{Binding ProgressValue}" Height="30"/>
-        <TextBlock x:Name="TaskInfo" Margin="0,0,0,90" Height="20"></TextBlock>
+        <ProgressBar Minimum="0" Maximum="{Binding MaximumValue}" Value="{Binding ProgressValue}" Height="30"/>
+        <TextBlock TextAlignment="Center" x:Name="TaskInfo" Margin="0,0,0,90" Height="20"></TextBlock>
         <Button x:Name="CancelTest" Margin="0,0,0,-100" Width="120" Height="30">Cancel </Button>
     </Grid>
 </Window>

@@ -1,87 +1,53 @@
 ﻿namespace Thinning.UI.ViewModels
 {
-    using System.Windows.Media;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using Caliburn.Micro;
-    using Thinning.Infrastructure;
     using Thinning.UI.Helpers;
     using Thinning.UI.Helpers.Interfaces;
+    using Thinning.UI.Views;
 
     public class MainWindowViewModel : Conductor<IScreen>.Collection.AllActive
     {
-        private ICardContent cardContent;
+        private readonly IMainWindowViewModelHelper helper;
 
-        private IWindowManager windowManager;
-
-        public MainWindowViewModel(ICardContent cardContent, IWindowManager windowManager)
+        public MainWindowViewModel(IMainWindowViewModelHelper helper)
         {
-            this.cardContent = cardContent;
-            this.windowManager = windowManager;
+            this.helper = helper;
 
-            this.Items.Add(new PerformanceChartViewModel { DisplayName = "K3M" });
-            this.Items.Add(new PerformanceChartViewModel { DisplayName = "KMM" });
-            this.Items.Add(new PerformanceChartViewModel { DisplayName = "Zhang Suen" });
-
-            this.HardwareInfo = this.cardContent.GetHardwareInfo();
-            this.NotifyOfPropertyChange(() => this.HardwareInfo);
+            this.helper.SetReferenceToViewModel(this);
+            this.helper.SetTabsForPerformanceCharts();
+            this.helper.SetHardwareInfo();
         }
 
         public string BaseImageUrl { get; set; }
 
-        public ImageSource K3MAlgorithmResult { get; set; }
-
-        public ImageSource KMMAlgorithmResult { get; set; }
-
-        public ImageSource ZhangSuenAlgorithmResult { get; set; }
+        public ObservableCollection<ImageLabelViewStructure> Images { get; set; }
 
         public bool IsButtonsEnabled { get; set; } = true;
+
+        public bool IsRunButtonsEnabled { get; set; } = false;
 
         public string HardwareInfo { get; set; }
 
         public string ImageInfo { get; set; }
 
-        public void LoadImage()
+        public int SelectedIterationsCount { get; set; } = 10;
+
+        public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50, 70, 80 });
+
+        public List<int> ZoomPicker { get; set; } = new List<int>(new int[] { 2, 3, 4, 5, 6 });
+
+        public string IterationsZoomCardContent { get; set; } = "Iterations:                                          Zoom:";
+
+        public int SelectedZoomPicker
         {
-            var fileDialog = new FileDialog();
-
-            this.BaseImageUrl = fileDialog.GetImageFilepath();
-            this.NotifyOfPropertyChange(() => this.BaseImageUrl);
-
-            this.ImageInfo = this.cardContent.GetImageInfo(this.BaseImageUrl);
-            this.NotifyOfPropertyChange(() => this.ImageInfo);
+            get => ViewBoxTracking.ZoomFactor;
+            set => ViewBoxTracking.ZoomFactor = value;
         }
 
-        public async void RunAlgorithms()
-        {
-            this.IsButtonsEnabled = false;
-            this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
+        public void LoadImage() => this.helper.LoadImage();
 
-            var progressViewModel = new ProgressViewModel();
-            await this.windowManager.ShowWindowAsync(progressViewModel, null, null);
-
-            var algorithmTest = new AlgorithmTest();
-            var testResult = await algorithmTest.ExecuteAsync(this.BaseImageUrl, progressViewModel);
-
-            if (testResult != null)
-            {
-                var conversion = new ImageConversion();
-
-                this.K3MAlgorithmResult = conversion.BitmapToBitmapImage(testResult.K3MBitmapResult);
-                this.NotifyOfPropertyChange(() => this.K3MAlgorithmResult);
-
-                this.KMMAlgorithmResult = conversion.BitmapToBitmapImage(testResult.KMMBitmapResult);
-                this.NotifyOfPropertyChange(() => this.KMMAlgorithmResult);
-
-                this.ZhangSuenAlgorithmResult = conversion.BitmapToBitmapImage(testResult.ZhangSuenBitmapResult);
-                this.NotifyOfPropertyChange(() => this.ZhangSuenAlgorithmResult);
-
-                this.Items[0] = new PerformanceChartViewModel(testResult.K3MResultTimes, "K3M");
-                this.Items[1] = new PerformanceChartViewModel(testResult.KMMResultTimes, "KMM");
-                this.Items[2] = new PerformanceChartViewModel(testResult.ZhangSuenResultTimes, "Zhang Suen");
-                this.NotifyOfPropertyChange(() => this.Items);
-            }
-
-            this.IsButtonsEnabled = true;
-            this.NotifyOfPropertyChange(() => this.IsButtonsEnabled);
-        }
+        public async void RunAlgorithms() => this.helper.RunAlgorithms();
     }
 }

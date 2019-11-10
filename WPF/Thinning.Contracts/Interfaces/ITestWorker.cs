@@ -1,4 +1,4 @@
-﻿namespace Thinning.Infrastructure.Interfaces
+﻿namespace Thinning.Contracts.Interfaces
 {
     using System;
     using System.Drawing;
@@ -9,7 +9,7 @@
     {
         Bitmap PrepareBitmapToTestRun(Bitmap bitmap);
 
-        byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, out int stride);
+        byte[][] PrepareTestSamples(Bitmap bitmap, int iterations, int algorithmsCount, out int stride);
 
         TestResult RunAllAlgorithmsTestInterations(
             Bitmap bitmap,
@@ -19,6 +19,6 @@
             IProgress<int> progress,
             CancellationToken cancellationToken);
 
-        TestResult ByteArraysToBitmapResults(byte[][] testSamples, Bitmap bitmap);
+        TestResult ByteArraysToBitmapResults(TestResult resultTimes, int iterations, byte[][] testSamples, Bitmap bitmap);
     }
 }

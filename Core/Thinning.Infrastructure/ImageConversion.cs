@@ -6,8 +6,9 @@
     using System.Threading.Tasks;
     using System.Windows.Media.Imaging;
     using Accord.Imaging.Filters;
+    using Thinning.Infrastructure.Interfaces;
 
-    public class ImageConversion
+    public class ImageConversion : IImageConversion
     {
         public Bitmap Create8bppGreyscaleImage(Bitmap bitmap) => Grayscale.CommonAlgorithms.BT709.Apply(bitmap);
 

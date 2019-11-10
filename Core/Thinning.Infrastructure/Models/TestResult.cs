@@ -5,30 +5,8 @@
 
     public class TestResult
     {
-        public TestResult()
-        {
-        }
+        public List<Bitmap> ResultBitmaps { get; set; }
 
-        public TestResult(TestResult timesTestsResults, TestResult bitmapsTestResult)
-        {
-            K3MBitmapResult = bitmapsTestResult.K3MBitmapResult;
-            KMMBitmapResult = bitmapsTestResult.KMMBitmapResult;
-            ZhangSuenBitmapResult = bitmapsTestResult.ZhangSuenBitmapResult;
-            K3MResultTimes = timesTestsResults.K3MResultTimes;
-            KMMResultTimes = timesTestsResults.KMMResultTimes;
-            ZhangSuenResultTimes = timesTestsResults.ZhangSuenResultTimes;
-        }
-
-        public Bitmap K3MBitmapResult { get; set; }
-
-        public Bitmap KMMBitmapResult { get; set; }
-
-        public Bitmap ZhangSuenBitmapResult { get; set; }
-
-        public List<double> KMMResultTimes { get; set; }
-
-        public List<double> K3MResultTimes { get; set; }
-
-        public List<double> ZhangSuenResultTimes { get; set; }
+        public List<List<double>> ResultTimes { get; set; }
     }
 }

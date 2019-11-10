@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.Windows;
     using Caliburn.Micro;
-    using Thinning.UI.Helpers;
-    using Thinning.UI.Helpers.Interfaces;
+    using Thinning.UI.Helpers.Extensions;
     using Thinning.UI.ViewModels;
 
     public class Bootstrapper : BootstrapperBase
@@ -24,14 +23,7 @@
 
         protected override void Configure()
         {
-            this.simpleContainer.Singleton<IWindowManager, WindowManager>();
-            this.simpleContainer.Singleton<IEventAggregator, EventAggregator>();
-
-            this.simpleContainer.PerRequest<MainWindowViewModel, MainWindowViewModel>();
-            this.simpleContainer.PerRequest<PerformanceChartViewModel, PerformanceChartViewModel>();
-
-            this.simpleContainer.PerRequest<ICardContent, CardContent>();
-
+            this.simpleContainer.InjectInterfaces();
             base.Configure();
         }
 

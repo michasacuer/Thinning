@@ -1,6 +1,7 @@
 ﻿namespace Thinning.Algorithm
 {
     using System;
+    using System.Diagnostics;
     using System.Threading.Tasks;
     using Thinning.Infrastructure.Consts;
     using Thinning.Infrastructure.Interfaces.Algorithms;
@@ -9,12 +10,15 @@
     {
         private K3MConsts consts;
 
+        private Stopwatch stopwatch;
+
         public K3M()
         {
+            this.stopwatch = new Stopwatch();
             this.consts = new K3MConsts();
         }
 
-        public byte[] Execute(byte[] pixels, int stride, int height, int width)
+        public byte[] Execute(byte[] pixels, int stride, int height, int width, out double executionTime)
         {
             bool deletion = true;
 
@@ -24,6 +28,8 @@
 
             while (deletion)
             {
+                this.stopwatch.Start();
+
                 deletion = false;
 
                 Parallel.For(1, height - 1, y =>
@@ -154,6 +160,10 @@
             }
 
             Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
+
+            this.stopwatch.Stop();
+            executionTime = (double)this.stopwatch.ElapsedTicks / Stopwatch.Frequency * 1000;
+            this.stopwatch.Restart();
 
             return pixels;
         }

@@ -3,7 +3,7 @@
     using System;
     using System.Drawing;
     using System.Threading;
-    using Thinning.Infrastructure.Interfaces;
+    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure.Models;
 
     public class Test : ITest
@@ -15,20 +15,25 @@
             this.worker = worker;
         }
 
-        public TestResult Run(string imageFilepath, IProgress<int> progress, CancellationToken cancellationToken)
+        public TestResult Run(
+            int iterations,
+            int algorthmsCount,
+            string imageFilepath,
+            IProgress<int> progress,
+            CancellationToken cancellationToken)
         {
-            int iterations = 20;
             int stride;
 
             var bitmap = this.worker.PrepareBitmapToTestRun(new Bitmap(imageFilepath));
-            var testSamples = this.worker.PrepareTestSamples(bitmap, iterations, out stride);
-            var timesTestResult = this.worker.RunAllAlgorithmsTestInterations(bitmap, stride, testSamples, iterations, progress, cancellationToken);
+            var testSamples = this.worker.PrepareTestSamples(bitmap, iterations, algorthmsCount, out stride);
+            var timesTestResult = this.worker.RunAllAlgorithmsTestInterations(
+                    bitmap, stride, testSamples, iterations, progress, cancellationToken);
 
             if (timesTestResult != null)
             {
-                var bitmapsTestResult = this.worker.ByteArraysToBitmapResults(testSamples, bitmap);
+                var testResult = this.worker.ByteArraysToBitmapResults(timesTestResult, iterations,  testSamples, bitmap);
 
-                return new TestResult(timesTestResult, bitmapsTestResult);
+                return testResult;
             }
             else
             {

@@ -1,8 +1,9 @@
 ﻿namespace Thinning.UI.Helpers
 {
     using Microsoft.Win32;
+    using Thinning.UI.Helpers.Interfaces;
 
-    public class FileDialog
+    public class FileDialog : IFileDialog
     {
         public string GetImageFilepath()
         {

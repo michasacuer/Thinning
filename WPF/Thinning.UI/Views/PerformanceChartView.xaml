@@ -17,7 +17,7 @@
                 <lvc:Axis Title="Run" Labels="{Binding Labels}"></lvc:Axis>
             </lvc:CartesianChart.AxisX>
             <lvc:CartesianChart.AxisY>
-                <lvc:Axis LabelFormatter="{Binding Formatter}"></lvc:Axis>
+                <lvc:Axis MaxValue="{Binding MaxValue}" MinValue="1" LabelFormatter="{Binding Formatter}"></lvc:Axis>
             </lvc:CartesianChart.AxisY>
         </lvc:CartesianChart>
     </Grid>
