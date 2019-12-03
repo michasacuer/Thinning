@@ -68,17 +68,20 @@
 
         public async void RunAlgorithms()
         {
-            this.mainWindowViewModel.IsButtonsEnabled = false;
-            this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsButtonsEnabled);
-
-            var testResult = await this.ExecuteTests();
-            if (testResult != null)
+            if (!this.mainWindowViewModel.BaseImageUrl.Equals(string.Empty))
             {
-                this.AttachResultsToAlgorithms(testResult);
-            }
+                this.mainWindowViewModel.IsButtonsEnabled = false;
+                this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsButtonsEnabled);
 
-            this.mainWindowViewModel.IsButtonsEnabled = true;
-            this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsButtonsEnabled);
+                var testResult = await this.ExecuteTests();
+                if (testResult != null)
+                {
+                    this.AttachResultsToAlgorithms(testResult);
+                }
+
+                this.mainWindowViewModel.IsButtonsEnabled = true;
+                this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsButtonsEnabled);
+            }
         }
 
         public void SetTabsForPerformanceCharts()
