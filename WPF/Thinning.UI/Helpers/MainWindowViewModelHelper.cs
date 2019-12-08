@@ -110,12 +110,16 @@
 
         private void AttachResultsToAlgorithms(TestResult testResult)
         {
+            var times = new decimal[3];
+
             this.mainWindowViewModel.Images = new ObservableCollection<ImageLabelViewStructure>();
             double maxValue = this.GetMaxValueFromResultTimes(testResult.ResultTimes);
 
             int algorithmCount = 0;
             foreach (var timesList in testResult.ResultTimes)
             {
+                decimal summary = 0;
+
                 this.mainWindowViewModel.Items[algorithmCount] = new PerformanceChartViewModel(
                     this.performanceChartHelper,
                     timesList,
@@ -127,6 +131,9 @@
                     Image = this.imageConversion.BitmapToBitmapImage(testResult.ResultBitmaps[algorithmCount]),
                     Label = this.mainWindowViewModel.Items[algorithmCount].DisplayName,
                 });
+
+
+                times[algorithmCount] = (decimal)timesList.Sum() / 1000;
 
                 algorithmCount++;
             }
