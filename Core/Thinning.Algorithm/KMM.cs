@@ -27,7 +27,8 @@
 
                 deletion = false;
 
-                Parallel.For(1, height - 1, y =>
+                var po = new ParallelOptions { MaxDegreeOfParallelism = 2 };
+                Parallel.For(1, height - 1, po, y =>
                 {
                     int offset = y * stride;
 
@@ -51,7 +52,7 @@
                     }
                 });
 
-                Parallel.For(1, height, y =>
+                Parallel.For(1, height, po, y =>
                 {
                     int offset = y * stride;
 
@@ -98,7 +99,7 @@
                 {
                     int value = n == 2 ? Value.Two : Value.Three;
 
-                    Parallel.For(1, height, y =>
+                    Parallel.For(1, height, po, y =>
                     {
                         int offset = y * stride;
 

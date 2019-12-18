@@ -11,6 +11,7 @@
         public byte[] Execute(byte[] pixels, int stride, int height, int width, out double executionTime)
         {
             var stopwatch = new Stopwatch();
+            var po = new ParallelOptions { MaxDegreeOfParallelism = 2 };
 
             bool deletion = true;
 
@@ -25,7 +26,7 @@
 
                 deletion = false;
 
-                Parallel.For(1, height - 1, y =>
+                Parallel.For(1, height - 1, po, y =>
                 {
                     int offset = y * stride;
 
@@ -66,7 +67,7 @@
 
                 Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
 
-                Parallel.For(1, height - 1, y =>
+                Parallel.For(1, height - 1, po, y =>
                 {
                     int offset = y * stride;
 

@@ -25,6 +25,7 @@
             var temp = new byte[pixels.Length];
             var result = new byte[pixels.Length];
             Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
+            var po = new ParallelOptions { MaxDegreeOfParallelism = 2 };
 
             while (deletion)
             {
@@ -32,7 +33,7 @@
 
                 deletion = false;
 
-                Parallel.For(1, height - 1, y =>
+                Parallel.For(1, height - 1, po, y =>
                 {
                     int offset = y * stride;
 
@@ -75,7 +76,7 @@
 
                 for (int i = 1; i < this.consts.A.Length; i++)
                 {
-                    Parallel.For(1, height - 1, y =>
+                    Parallel.For(1, height - 1, po, y =>
                     {
                         int offset = y * stride;
 
