@@ -21,7 +21,7 @@
             hardwareInfoList.Add("OS: " + this.systemInfo.GetOperativeSystemInfo());
             hardwareInfoList.Add("CPU: " + this.systemInfo.GetCpuInfo());
             hardwareInfoList.Add("GPU: " + this.systemInfo.GetGpuInfo());
-            hardwareInfoList.Add("MEM: " + this.systemInfo.GetTotalMemory());
+            hardwareInfoList.Add("MEMORY: " + this.systemInfo.GetTotalMemory());
 
             var sb = new StringBuilder();
             foreach (string info in hardwareInfoList)
