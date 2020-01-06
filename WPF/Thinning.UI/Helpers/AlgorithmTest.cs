@@ -26,19 +26,19 @@
                 progressViewModel.CancellationToken = new CancellationTokenSource();
 
                 int i = 0;
-                int whichAlgorithm = 1;
+                int algorithmCount = 1;
 
                 IProgress<int> progress = new Progress<int>((progressValue) =>
                 {
                     if (i < algorithmIterations)
                     {
-                        progressViewModel.TaskInfo = $"Algorithm number {whichAlgorithm} executing...";
+                        progressViewModel.TaskInfo = $"Algorithm number {algorithmCount} executing...";
                         i++;
                     }
                     else
                     {
                         i = 0;
-                        whichAlgorithm++;
+                        algorithmCount++;
                     }
 
                     progressViewModel.ProgressValue = progressValue;

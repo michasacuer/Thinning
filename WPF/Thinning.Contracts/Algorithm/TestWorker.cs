@@ -69,7 +69,7 @@
 
             int sample = 0;
             int progressValue = 1;
-            int whichAlgorithm = 0;
+            int algorithmCount = 0;
 
             foreach (var algorithm in this.algorithms)
             {
@@ -84,13 +84,13 @@
 
                     double executionTime;
                     testSamples[sample] = algorithm.Execute(testSamples[sample], stride, bitmap.Height, bitmap.Width, out executionTime);
-                    resultTimes[whichAlgorithm].Add(executionTime);
+                    resultTimes[algorithmCount].Add(executionTime);
 
                     sample++;
                     progress.Report(progressValue++);
                 }
 
-                whichAlgorithm++;
+                algorithmCount++;
             }
 
             return new TestResult
