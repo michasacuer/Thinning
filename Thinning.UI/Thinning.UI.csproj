@@ -151,11 +151,11 @@
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Thinning.Algorithm\Thinning.Algorithm.csproj">
+    <ProjectReference Include="..\Thinning.Algorithm\Thinning.Algorithm.csproj">
       <Project>{9bfb384e-ca70-407a-9e0e-b9ac235ed7d6}</Project>
       <Name>Thinning.Algorithm</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Core\Thinning.Infrastructure\Thinning.Infrastructure.csproj">
+    <ProjectReference Include="..\Thinning.Infrastructure\Thinning.Infrastructure.csproj">
       <Project>{19B5AECE-CCE3-4312-AB19-D190AF1A1441}</Project>
       <Name>Thinning.Infrastructure</Name>
     </ProjectReference>
