@@ -34,7 +34,7 @@
 
         public int SelectedIterationsCount { get; set; } = 10;
 
-        public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50, 70, 80 });
+        public List<int> IterationsList { get; set; } = new List<int>(new int[] { 10, 20, 30, 40, 50, 60, 70, 80 });
 
         public List<int> ZoomPicker { get; set; } = new List<int>(new int[] { 2, 3, 4, 5, 6 });
 
