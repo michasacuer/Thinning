@@ -1,4 +1,4 @@
-﻿namespace Thinning.Contracts.Interfaces
+﻿namespace Thinning.Infrastructure.Interfaces
 {
     public interface ISystemInfo
     {

@@ -1,4 +1,4 @@
-﻿namespace Thinning.Infrastructure.Consts
+﻿namespace Thinning.Algorithm.Consts
 {
     public static class Value
     {

@@ -1,8 +1,8 @@
-﻿namespace Thinning.Contracts
+﻿namespace Thinning.Infrastructure
 {
     using System.Management;
     using Microsoft.VisualBasic.Devices;
-    using Thinning.Contracts.Interfaces;
+    using Thinning.Infrastructure.Interfaces;
 
     public class SystemInfo : ISystemInfo
     {

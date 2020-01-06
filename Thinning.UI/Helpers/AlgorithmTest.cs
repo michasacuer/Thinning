@@ -4,8 +4,8 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Autofac;
-    using Thinning.Contracts;
-    using Thinning.Contracts.Interfaces;
+    using Thinning.Infrastructure;
+    using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
     using Thinning.UI.Helpers.Interfaces;
     using Thinning.UI.ViewModels;

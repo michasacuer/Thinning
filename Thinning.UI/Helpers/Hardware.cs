@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Text;
-    using Thinning.Contracts.Interfaces;
+    using Thinning.Infrastructure.Interfaces;
     using Thinning.UI.Helpers.Interfaces;
 
     public class Hardware : IHardware

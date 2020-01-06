@@ -1,7 +1,7 @@
-﻿namespace Thinning.Contracts.Interfaces
+﻿namespace Thinning.Infrastructure.Interfaces
 {
     using System.Collections.Generic;
-    using Thinning.Infrastructure.Interfaces;
+    using Thinning.Algorithm.Interfaces;
 
     public interface IApplicationSetup
     {

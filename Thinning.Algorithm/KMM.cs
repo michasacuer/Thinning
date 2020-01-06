@@ -2,8 +2,8 @@
 {
     using System.Diagnostics;
     using System.Threading.Tasks;
-    using Thinning.Infrastructure.Consts;
-    using Thinning.Infrastructure.Interfaces.Algorithms;
+    using Thinning.Algorithm.Consts;
+    using Thinning.Algorithm.Interfaces;
 
     public class KMM : IKMM
     {

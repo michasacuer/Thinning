@@ -43,6 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Consts\K3MConsts.cs" />
+    <Compile Include="Consts\KMMConsts.cs" />
+    <Compile Include="Consts\PixelValues.cs" />
+    <Compile Include="Interfaces\IAlgorithm.cs" />
+    <Compile Include="Interfaces\IK3M.cs" />
+    <Compile Include="Interfaces\IKMM.cs" />
+    <Compile Include="Interfaces\IZhangSuen.cs" />
     <Compile Include="K3M.cs" />
     <Compile Include="KMM.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -53,12 +60,6 @@
     <None Include="..\..\Settings.stylecop">
       <Link>Settings.stylecop</Link>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Thinning.Infrastructure\Thinning.Infrastructure.csproj">
-      <Project>{19b5aece-cce3-4312-ab19-d190af1a1441}</Project>
-      <Name>Thinning.Infrastructure</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,8 +1,6 @@
 ﻿namespace Thinning.UI.Helpers.Extensions
 {
     using Caliburn.Micro;
-    using Thinning.Contracts;
-    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.UI.Helpers.Interfaces;

@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Caliburn.Micro;
-    using Thinning.Contracts.Interfaces;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
     using Thinning.UI.Helpers.Interfaces;

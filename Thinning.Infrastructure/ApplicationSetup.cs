@@ -1,11 +1,11 @@
-﻿namespace Thinning.Contracts
+﻿namespace Thinning.Infrastructure
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using Thinning.Algorithm;
-    using Thinning.Contracts.Interfaces;
+    using Thinning.Algorithm.Interfaces;
     using Thinning.Infrastructure.Interfaces;
 
     public class ApplicationSetup : IApplicationSetup
@@ -30,9 +30,9 @@
 
         private List<TypeInfo> GetAlgorithmsAssemblies()
         {
-            var algorithmAssemly = typeof(K3M).Assembly;
-            var algorithmAssemblies = algorithmAssemly.DefinedTypes.Where(type =>
-                    type.ImplementedInterfaces.Any(inter => inter == typeof(IAlgorithm))).ToList();
+            var algorithmAssembly = typeof(K3M).Assembly;
+            var algorithmAssemblies = algorithmAssembly.DefinedTypes.Where(type =>
+                    type.ImplementedInterfaces.Any(inter => inter == typeof(IAlgorithm)) && type.IsClass).ToList();
 
             return algorithmAssemblies;
         }

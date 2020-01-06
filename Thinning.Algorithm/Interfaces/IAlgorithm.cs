@@ -1,4 +1,4 @@
-﻿namespace Thinning.Infrastructure.Interfaces
+﻿namespace Thinning.Algorithm.Interfaces
 {
     public interface IAlgorithm
     {

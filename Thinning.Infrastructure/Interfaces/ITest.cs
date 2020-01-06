@@ -1,4 +1,4 @@
-﻿namespace Thinning.Contracts.Interfaces
+﻿namespace Thinning.Infrastructure.Interfaces
 {
     using System;
     using System.Threading;

@@ -3,7 +3,7 @@
     using System;
     using System.Drawing;
     using System.Threading;
-    using Thinning.Contracts.Interfaces;
+    using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
 
     public class Test : ITest

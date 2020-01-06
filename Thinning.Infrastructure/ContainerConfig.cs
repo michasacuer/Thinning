@@ -1,9 +1,7 @@
-﻿namespace Thinning.Contracts
+﻿namespace Thinning.Infrastructure
 {
     using Autofac;
     using Thinning.Contracts.Algorithm;
-    using Thinning.Contracts.Interfaces;
-    using Thinning.Infrastructure;
     using Thinning.Infrastructure.Interfaces;
 
     public class ContainerConfig
