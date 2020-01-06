@@ -155,10 +155,6 @@
       <Project>{19B5AECE-CCE3-4312-AB19-D190AF1A1441}</Project>
       <Name>Thinning.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Thinning.Contracts\Thinning.Contracts.csproj">
-      <Project>{a5976d58-40fe-4f20-b9e8-de2f6c40c3be}</Project>
-      <Name>Thinning.Contracts</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\MainWindowView.xaml">
