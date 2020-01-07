@@ -15,7 +15,6 @@
         public Bitmap CreateNonIndexedImage(Bitmap bitmap)
         {
             Bitmap resultBmp = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format32bppArgb);
-
             using (Graphics graphics = Graphics.FromImage(resultBmp))
             {
                 graphics.DrawImage(bitmap, 0, 0);
@@ -44,7 +43,6 @@
         public Bitmap Binarize(Bitmap bitmap)
         {
             int threshold = this.CalculateOtsuValue(bitmap);
-
             int pixelBPP = Image.GetPixelFormatSize(bitmap.PixelFormat) / 8;
 
             unsafe

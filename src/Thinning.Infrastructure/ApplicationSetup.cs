@@ -30,9 +30,9 @@
 
         private List<TypeInfo> GetAlgorithmsAssemblies()
         {
-            var algorithmAssembly = typeof(K3M).Assembly;
+            var algorithmAssembly = typeof(IAlgorithm).Assembly;
             var algorithmAssemblies = algorithmAssembly.DefinedTypes.Where(type =>
-                    type.ImplementedInterfaces.Any(inter => inter == typeof(IAlgorithm)) && type.IsClass).ToList();
+                    type.ImplementedInterfaces.Any(i => i == typeof(IAlgorithm)) && type.IsClass).ToList();
 
             return algorithmAssemblies;
         }
