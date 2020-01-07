@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29201.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thinning.UI", "Thinning.UI\Thinning.UI.csproj", "{07453180-4038-457C-81BB-7017A2890660}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thinning.UI", "src\Thinning.UI\Thinning.UI.csproj", "{07453180-4038-457C-81BB-7017A2890660}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thinning.Infrastructure", "Thinning.Infrastructure\Thinning.Infrastructure.csproj", "{19B5AECE-CCE3-4312-AB19-D190AF1A1441}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thinning.Infrastructure", "src\Thinning.Infrastructure\Thinning.Infrastructure.csproj", "{19B5AECE-CCE3-4312-AB19-D190AF1A1441}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thinning.Algorithm", "Thinning.Algorithm\Thinning.Algorithm.csproj", "{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Thinning.Algorithm", "src\Thinning.Algorithm\Thinning.Algorithm.csproj", "{9BFB384E-CA70-407A-9E0E-B9AC235ED7D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
