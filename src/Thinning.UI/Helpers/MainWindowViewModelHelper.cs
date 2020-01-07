@@ -136,16 +136,19 @@
 
         private double GetMaxValueFromResultTimes(List<List<double>> times)
         {
-            var topValues = new List<double>();
+            double topValue = 0;
             foreach (var timesList in times)
             {
-                var sortedList = new List<double>(timesList).OrderByDescending(t => t).ToList();
-                topValues.Add(sortedList.First());
+                foreach (double time in timesList)
+                {
+                    if (time > topValue)
+                    {
+                        topValue = time;
+                    }
+                }
             }
 
-            topValues = topValues.OrderByDescending(t => t).ToList();
-
-            return topValues.First();
+            return topValue;
         }
     }
 }

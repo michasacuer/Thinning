@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using Thinning.Algorithm;
     using Thinning.Algorithm.Interfaces;
     using Thinning.Infrastructure.Interfaces;
 
