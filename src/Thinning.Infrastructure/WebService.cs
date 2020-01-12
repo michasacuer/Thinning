@@ -31,6 +31,14 @@
 
         public void UpdateStorage(TestResult testResult, string baseImageFilepath)
         {
+            this.SetPcInfo();
+            this.TestRunsToTestLines(testResult);
+            this.SetResultBitmaps(testResult);
+            this.SetTestImage(baseImageFilepath);
+        }
+
+        private void SetPcInfo()
+        {
             StorageDto.PcInfo = new PcInfo
             {
                 Cpu = this.systemInfo.GetCpuInfo(),
@@ -38,13 +46,16 @@
                 Memory = this.systemInfo.GetTotalMemory(),
                 Os = this.systemInfo.GetOperativeSystemInfo()
             };
+        }
 
+        private void TestRunsToTestLines(TestResult testResult)
+        {
             int algorithmCount = 0;
             foreach (var times in testResult.ResultTimes)
             {
                 StorageDto.TestLines[algorithmCount].Iterations = times.Count;
                 StorageDto.TestLines[algorithmCount].AlgorithmTestRuns = new List<TestRun>();
-                
+
                 int runCount = 0;
                 foreach (double time in times)
                 {
@@ -57,7 +68,10 @@
                     runCount++;
                 }
             }
+        }
 
+        private void SetResultBitmaps(TestResult testResult)
+        {
             StorageDto.Images = new List<Storage.Image>();
             int imageCount = 0;
             foreach (var bmp in testResult.ResultBitmaps)
@@ -74,7 +88,10 @@
 
                 imageCount++;
             }
+        }
 
+        private void SetTestImage(string baseImageFilepath)
+        {
             var testBitmap = new Bitmap(baseImageFilepath);
             var bitmapData = testBitmap.LockBits(
                 new Rectangle(0, 0, testBitmap.Width, testBitmap.Height),
