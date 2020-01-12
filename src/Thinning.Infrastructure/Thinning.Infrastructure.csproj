@@ -51,7 +51,7 @@
       <HintPath>..\..\packages\Accord.Statistics.3.8.2-alpha\lib\net462\Accord.Statistics.dll</HintPath>
     </Reference>
     <Reference Include="Autofac, Version=4.9.4.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
+      <HintPath>..\..\packages\Autofac.4.9.4\lib\net45\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
