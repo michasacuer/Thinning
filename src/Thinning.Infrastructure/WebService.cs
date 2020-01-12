@@ -1,9 +1,13 @@
 ﻿namespace Thinning.Infrastructure
 {
+    using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Drawing.Imaging;
+    using System.Net.Http;
     using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Threading.Tasks;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
     using static Thinning.Infrastructure.Models.Storage;
@@ -46,6 +50,31 @@
                 Memory = this.systemInfo.GetTotalMemory(),
                 Os = this.systemInfo.GetOperativeSystemInfo()
             };
+        }
+
+        public async Task<bool> PublishResults()
+        {
+            const string endpoint = "https://localhost:5001/api/test/add";
+
+            using (var client = new HttpClient())
+            {
+                var json = JsonConvert.SerializeObject(new
+                {
+                    pcInfo = StorageDto.PcInfo,
+                    testLines = StorageDto.TestLines,
+                    images = StorageDto.Images
+                });
+
+                var stringContent = new StringContent(json, Encoding.UTF8, "application/json");
+                var response = await client.PostAsync(endpoint, stringContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private void TestRunsToTestLines(TestResult testResult)

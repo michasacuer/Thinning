@@ -101,8 +101,7 @@
 
         public async void Publish()
         {
-
-
+            var succeded = await this.webService.PublishResults();
         }
 
         private async Task<TestResult> ExecuteTests()
