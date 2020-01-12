@@ -90,6 +90,7 @@
         {
             var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
             algorithmNames.ForEach(name => this.mainWindowViewModel.Items.Add(new PerformanceChartViewModel { DisplayName = name }));
+            this.webService.UpdateStorage(algorithmNames);
         }
 
         public void SetHardwareInfo()
@@ -139,6 +140,7 @@
                 algorithmCount++;
             }
 
+            this.webService.UpdateStorage(testResult, this.mainWindowViewModel.BaseImageUrl);
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.Images);
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.Items);
         }

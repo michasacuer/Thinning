@@ -1,4 +1,4 @@
-﻿namespace Thinning.UI.Helpers
+﻿namespace Thinning.Infrastructure.Models
 {
     using System.Collections.Generic;
 
@@ -21,7 +21,6 @@
 
         public class Image
         {
-            public int? AlgorithmId { get; set; }
             public string AlgorithmName { get; set; }
             public int OriginalWidth { get; set; }
             public int OriginalHeight { get; set; }

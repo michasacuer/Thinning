@@ -1,7 +1,7 @@
-﻿namespace Thinning.UI.Helpers
+﻿namespace Thinning.Infrastructure.Models
 {
     using System.Collections.Generic;
-    using static Thinning.UI.Helpers.Storage;
+    using static Thinning.Infrastructure.Models.Storage;
 
     public class StorageDto
     {

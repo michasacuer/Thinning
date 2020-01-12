@@ -80,6 +80,8 @@
     <Compile Include="Interfaces\ITest.cs" />
     <Compile Include="Interfaces\ITestWorker.cs" />
     <Compile Include="Interfaces\IWebService.cs" />
+    <Compile Include="Models\Storage.cs" />
+    <Compile Include="Models\StorageDto.cs" />
     <Compile Include="Models\TestResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SystemInfo.cs" />

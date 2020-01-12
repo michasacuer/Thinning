@@ -23,6 +23,7 @@
             simpleContainer.PerRequest<IImageConversion, ImageConversion>();
             simpleContainer.PerRequest<IHardware, Hardware>();
             simpleContainer.PerRequest<ISystemInfo, SystemInfo>();
+            simpleContainer.PerRequest<IWebService, WebService>();
             simpleContainer.PerRequest<IMainWindowViewModelHelper, MainWindowViewModelHelper>();
             simpleContainer.PerRequest<IPerformanceChartViewModelHelper, PerformanceChartViewModelHelper>();
         }

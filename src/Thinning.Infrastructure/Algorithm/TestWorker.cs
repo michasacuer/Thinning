@@ -101,6 +101,7 @@
 
         public TestResult ByteArraysToBitmapResults(TestResult resultTimes, int iterations, byte[][] researchSamples, Bitmap bitmap)
         {
+            var rawBitmaps = new List<byte[]>();
             var resultBitmaps = new List<Bitmap>();
             foreach (var timesList in resultTimes.ResultTimes)
             {
@@ -117,6 +118,7 @@
                     bitmap.PixelFormat);
 
                 Marshal.Copy(researchSamples[sample], 0, bitmapData.Scan0, researchSamples[sample].Length);
+                rawBitmaps.Add(researchSamples[sample]);
                 bmp.UnlockBits(bitmapData);
 
                 sample += iterations;
@@ -124,6 +126,7 @@
 
             return new TestResult
             {
+                RawBitmaps = rawBitmaps,
                 ResultTimes = resultTimes.ResultTimes,
                 ResultBitmaps = resultBitmaps,
             };
