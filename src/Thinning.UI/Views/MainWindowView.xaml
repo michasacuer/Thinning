@@ -72,7 +72,7 @@
             Width="50" 
             FontSize="14" 
             Grid.Row="1" 
-            Margin="-120, 0, 0, -195">
+            Margin="-120, 0, 0, -220">
         </ComboBox>
 
         <ComboBox 
@@ -81,7 +81,7 @@
             Width="50" 
             FontSize="14" 
             Grid.Row="1" 
-            Margin="270, 0, 0, -195">
+            Margin="270, 0, 0, -220">
         </ComboBox>
 
         <Image x:Name="MainImage" Source="{Binding BaseImageUrl}" Grid.Row="0" Grid.Column="0" Margin="10"/>
