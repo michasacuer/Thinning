@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Linq;
     using System.Threading.Tasks;
     using Caliburn.Micro;
     using Thinning.Infrastructure.Interfaces;
@@ -26,6 +25,8 @@
 
         private readonly IPerformanceChartViewModelHelper performanceChartHelper;
 
+        private readonly IWebService webService;
+
         private MainWindowViewModel mainWindowViewModel;
 
         public MainWindowViewModelHelper(
@@ -35,7 +36,8 @@
             IAlgorithmTest algorithmTest,
             IFileDialog fileDialog,
             IImageConversion imageConversion,
-            IPerformanceChartViewModelHelper performanceChartHelper)
+            IPerformanceChartViewModelHelper performanceChartHelper,
+            IWebService webService)
         {
             this.cardContent = cardContent;
             this.applicationSetup = applicationSetup;
@@ -44,6 +46,7 @@
             this.algorithmTest = algorithmTest;
             this.imageConversion = imageConversion;
             this.performanceChartHelper = performanceChartHelper;
+            this.webService = webService;
         }
 
         public void SetReferenceToViewModel(MainWindowViewModel mainWindowViewModel) =>
@@ -93,6 +96,12 @@
         {
             this.mainWindowViewModel.HardwareInfo = this.cardContent.GetHardwareInfo();
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.HardwareInfo);
+        }
+
+        public async void Publish()
+        {
+
+
         }
 
         private async Task<TestResult> ExecuteTests()
@@ -150,5 +159,6 @@
 
             return topValue;
         }
+
     }
 }

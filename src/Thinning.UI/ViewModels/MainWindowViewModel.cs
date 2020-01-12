@@ -49,5 +49,7 @@
         public void LoadImage() => this.helper.LoadImage();
 
         public async void RunAlgorithms() => this.helper.RunAlgorithms();
+
+        public async void Publish() => this.helper.Publish();
     }
 }

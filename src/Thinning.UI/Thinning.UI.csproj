@@ -101,6 +101,8 @@
     <Compile Include="Helpers\Interfaces\IViewModel.cs" />
     <Compile Include="Helpers\MainWindowViewModelHelper.cs" />
     <Compile Include="Helpers\PerformanceChartViewModelHelper.cs" />
+    <Compile Include="Helpers\Storage.cs" />
+    <Compile Include="Helpers\StorageDto.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PerformanceChartViewModel.cs" />
     <Compile Include="ViewModels\ProgressViewModel.cs" />
