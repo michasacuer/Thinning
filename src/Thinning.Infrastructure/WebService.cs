@@ -33,7 +33,7 @@
             }
         }
 
-        public void UpdateStorage(TestResult testResult, string baseImageFilepath)
+        public async Task UpdateStorage(TestResult testResult, string baseImageFilepath)
         {
             this.SetPcInfo();
             this.TestRunsToTestLines(testResult);
@@ -96,6 +96,8 @@
 
                     runCount++;
                 }
+
+                algorithmCount++;
             }
         }
 

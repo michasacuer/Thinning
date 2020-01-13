@@ -8,7 +8,7 @@
     {
         void UpdateStorage(List<string> algorithmNames);
 
-        void UpdateStorage(TestResult testResul, string baseImageFilepath);
+        Task UpdateStorage(TestResult testResul, string baseImageFilepath);
 
         Task<bool> PublishResults();
     }
