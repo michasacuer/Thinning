@@ -6,9 +6,11 @@
     
     public interface IWebService
     {
+        void UpdatePcInfoStorage(string cpu, string gpu, string memory, string os);
+
         void UpdateStorage(List<string> algorithmNames);
 
-        Task UpdateStorage(TestResult testResul, string baseImageFilepath);
+        void UpdateStorage(TestResult testResul, string baseImageFilepath);
 
         Task<bool> PublishResults();
     }

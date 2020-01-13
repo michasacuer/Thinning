@@ -78,11 +78,12 @@
                 var testResult = await this.ExecuteTests();
                 if (testResult != null)
                 {
-                    await this.AttachResultsToAlgorithms(testResult);
+                    this.AttachResultsToAlgorithms(testResult);
                 }
 
                 this.mainWindowViewModel.IsButtonsEnabled = true;
                 this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsButtonsEnabled);
+                this.webService.UpdateStorage(testResult, this.mainWindowViewModel.BaseImageUrl);
             }
         }
 
@@ -116,7 +117,7 @@
                 iterations, algorithmsCount, this.mainWindowViewModel.BaseImageUrl, progressViewModel);
         }
 
-        private async Task AttachResultsToAlgorithms(TestResult testResult)
+        private void AttachResultsToAlgorithms(TestResult testResult)
         {
             this.mainWindowViewModel.Images = new ObservableCollection<ImageLabelViewStructure>();
             double maxValue = this.GetMaxValueFromResultTimes(testResult.ResultTimes);
@@ -141,7 +142,6 @@
 
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.Images);
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.Items);
-            await this.webService.UpdateStorage(testResult, this.mainWindowViewModel.BaseImageUrl);
         }
 
         private double GetMaxValueFromResultTimes(List<List<double>> times)
