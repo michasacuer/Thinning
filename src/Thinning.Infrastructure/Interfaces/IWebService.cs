@@ -6,6 +6,8 @@
     
     public interface IWebService
     {
+        void UpdatePcInfoStorage(string cpu, string gpu, string memory, string os);
+
         void UpdateStorage(List<string> algorithmNames);
 
         void UpdateStorage(TestResult testResul, string baseImageFilepath);

@@ -14,11 +14,15 @@
 
     public class WebService : IWebService
     {
-        private readonly ISystemInfo systemInfo;
-
-        public WebService(ISystemInfo systemInfo)
+        public void UpdatePcInfoStorage(string cpu, string gpu, string memory, string os)
         {
-            this.systemInfo = systemInfo;
+            StorageDto.PcInfo = new PcInfo
+            {
+                Cpu = cpu,
+                Gpu = gpu,
+                Memory = memory,
+                Os = os
+            };
         }
 
         public void UpdateStorage(List<string> algorithmNames)
@@ -35,21 +39,9 @@
 
         public void UpdateStorage(TestResult testResult, string baseImageFilepath)
         {
-            this.SetPcInfo();
             this.TestRunsToTestLines(testResult);
             this.SetResultBitmaps(testResult);
             this.SetTestImage(baseImageFilepath);
-        }
-
-        private void SetPcInfo()
-        {
-            StorageDto.PcInfo = new PcInfo
-            {
-                Cpu = this.systemInfo.GetCpuInfo(),
-                Gpu = this.systemInfo.GetGpuInfo(),
-                Memory = this.systemInfo.GetTotalMemory(),
-                Os = this.systemInfo.GetOperativeSystemInfo()
-            };
         }
 
         public async Task<bool> PublishResults()
@@ -96,6 +88,8 @@
 
                     runCount++;
                 }
+
+                algorithmCount++;
             }
         }
 

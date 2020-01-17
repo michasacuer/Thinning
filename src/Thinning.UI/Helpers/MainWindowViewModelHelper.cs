@@ -83,6 +83,7 @@
 
                 this.mainWindowViewModel.IsButtonsEnabled = true;
                 this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.IsButtonsEnabled);
+                this.webService.UpdateStorage(testResult, this.mainWindowViewModel.BaseImageUrl);
             }
         }
 
@@ -139,7 +140,6 @@
                 algorithmCount++;
             }
 
-            this.webService.UpdateStorage(testResult, this.mainWindowViewModel.BaseImageUrl);
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.Images);
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.Items);
         }
