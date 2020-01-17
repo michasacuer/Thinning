@@ -85,7 +85,7 @@
                 StorageDto.TestLines[algorithmCount].Iterations = times.Count;
                 StorageDto.TestLines[algorithmCount].AlgorithmTestRuns = new List<TestRun>();
 
-                int runCount = 0;
+                int runCount = 1;
                 foreach (double time in times)
                 {
                     StorageDto.TestLines[algorithmCount].AlgorithmTestRuns.Add(new TestRun
@@ -134,7 +134,7 @@
 
             StorageDto.Images.Add(new Storage.Image
             {
-                OriginalBpp = 0,
+                OriginalBpp = testBitmap.PixelFormat,
                 OriginalHeight = testBitmap.Height,
                 OriginalWidth = testBitmap.Width,
                 ImageContent = imageContent,
