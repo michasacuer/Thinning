@@ -105,7 +105,7 @@
             var resultBitmaps = new List<Bitmap>();
             foreach (var timesList in resultTimes.ResultTimes)
             {
-                resultBitmaps.Add(new Bitmap(bitmap.Width, bitmap.Height));
+                resultBitmaps.Add(new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format8bppIndexed));
             }
 
             var sample = 0;

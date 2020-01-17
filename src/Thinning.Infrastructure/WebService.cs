@@ -101,7 +101,7 @@
             {
                 StorageDto.Images.Add(new Storage.Image
                 {
-                    OriginalBpp = 0,
+                    OriginalBpp = PixelFormat.Format8bppIndexed,
                     OriginalHeight = bmp.Height,
                     OriginalWidth = bmp.Width,
                     ImageContent = testResult.RawBitmaps[imageCount],
