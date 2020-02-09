@@ -95,6 +95,11 @@
             this.mainWindowViewModel.NotifyOfPropertyChange(() => this.mainWindowViewModel.HardwareInfo);
         }
 
+        public void UploadAlgorithm()
+        {
+            throw new System.NotImplementedException();
+        }
+
         private async Task<TestResult> ExecuteTests()
         {
             int iterations = this.mainWindowViewModel.SelectedIterationsCount;
