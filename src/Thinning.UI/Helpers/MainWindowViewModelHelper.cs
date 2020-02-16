@@ -1,10 +1,14 @@
 ﻿namespace Thinning.UI.Helpers
 {
+    using System;
+    using System.CodeDom.Compiler;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using Caliburn.Micro;
+    using Microsoft.CSharp;
     using Thinning.Infrastructure.Interfaces;
     using Thinning.Infrastructure.Models;
     using Thinning.UI.Helpers.Interfaces;
@@ -86,7 +90,13 @@
         public void SetTabsForPerformanceCharts()
         {
             var algorithmNames = this.applicationSetup.GetRegisteredAlgorithmNames();
-            algorithmNames.ForEach(name => this.mainWindowViewModel.Items.Add(new PerformanceChartViewModel { DisplayName = name }));
+            foreach (string name in algorithmNames)
+            {
+                if (!this.mainWindowViewModel.Items.Any(item => string.Equals(item.DisplayName, name)))
+                {
+                    this.mainWindowViewModel.Items.Add(new PerformanceChartViewModel { DisplayName = name });
+                }
+            }
         }
 
         public void SetHardwareInfo()
@@ -97,7 +107,24 @@
 
         public void UploadAlgorithm()
         {
-            throw new System.NotImplementedException();
+            string filepath = this.fileDialog.GetAlgorithmImplementationFilepath();
+            if (!filepath.Equals(string.Empty))
+            {
+                var provider = new CSharpCodeProvider();
+                var options = new CompilerParameters
+                {
+                    OutputAssembly = $"{Guid.NewGuid().ToString()}.dll"
+                };
+
+                options.ReferencedAssemblies.Add(@"Thinning.Algorithm.dll");
+                options.GenerateInMemory = true;
+                string source = File.ReadAllText($@"{filepath}");
+
+                var x = provider.CompileAssemblyFromSource(options, new[] { source });
+
+            }
+
+            this.SetTabsForPerformanceCharts();
         }
 
         private async Task<TestResult> ExecuteTests()

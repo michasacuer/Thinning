@@ -11,5 +11,7 @@
         void LoadImage();
 
         void RunAlgorithms();
+
+        void UploadAlgorithm();
     }
 }
