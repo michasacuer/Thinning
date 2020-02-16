@@ -3,5 +3,7 @@
     public interface IFileDialog
     {
         string GetImageFilepath();
+
+        string GetAlgorithmImplementationFilepath();
     }
 }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using System.Security.Policy;
     using Thinning.Algorithm.Interfaces;
     using Thinning.Infrastructure.Interfaces;
 
@@ -29,9 +30,20 @@
 
         private List<TypeInfo> GetAlgorithmsAssemblies()
         {
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            Evidence asEvidence = currentDomain.Evidence;
+            var ass = currentDomain.GetAssemblies();
+
             var algorithmAssembly = typeof(IAlgorithm).Assembly;
-            var algorithmAssemblies = algorithmAssembly.DefinedTypes.Where(type =>
-                    type.ImplementedInterfaces.Any(i => i == typeof(IAlgorithm)) && type.IsClass).ToList();
+            var algorithmAssemblies = new List<TypeInfo>();
+            foreach (var assembly in ass)
+            {
+                algorithmAssemblies.AddRange(assembly.DefinedTypes.Where(type =>
+                    type.ImplementedInterfaces.Any(i => i == typeof(IAlgorithm)) && type.IsClass).ToList());
+            }
+
+            //var algorithmAssemblies = algorithmAssembly.DefinedTypes.Where(type =>
+            //        type.ImplementedInterfaces.Any(i => i == typeof(IAlgorithm)) && type.IsClass).ToList();
 
             return algorithmAssemblies;
         }

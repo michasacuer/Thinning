@@ -15,5 +15,15 @@
 
             return openPicture.ShowDialog() == true ? openPicture.FileName : string.Empty;
         }
+
+        public string GetAlgorithmImplementationFilepath()
+        {
+            OpenFileDialog openFile = new OpenFileDialog()
+            {
+                FilterIndex = 1,
+            };
+
+            return openFile.ShowDialog() == true ? openFile.FileName : string.Empty;
+        }
     }
 }

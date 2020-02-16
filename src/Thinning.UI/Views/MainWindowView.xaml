@@ -108,8 +108,9 @@
             </ItemsControl>
         </ScrollViewer>
 
-        <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="LoadImage" Grid.Row="3" Width="150" Content="Load image" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20"></Button>
-        <Button IsEnabled="{Binding IsRunButtonsEnabled}" x:Name="RunAlgorithms" Grid.Row="3" Width="150" Content="Run tests" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="20"></Button>
+        <Button IsEnabled="{Binding IsButtonsEnabled}" x:Name="LoadImage" Grid.Row="3" Width="175" Content="Load image" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20, 0, 0, 25"></Button>
+        <Button IsEnabled="{Binding IsRunButtonsEnabled}" x:Name="RunAlgorithms" Grid.Row="3" Width="175" Content="Run tests" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0, 0, 20, 25"></Button>
+        <Button x:Name="UploadAlgorithm" Grid.Row="3" Width="175" Content="Upload algorithm" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0, 0, 20, 8"></Button>
 
         <TabControl Style="{StaticResource MaterialDesignTabControl}" Grid.Row="1" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="3" x:Name="Items">
             <TabControl.ItemTemplate>
