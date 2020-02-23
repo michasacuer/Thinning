@@ -8,5 +8,7 @@
         List<string> GetRegisteredAlgorithmNames();
 
         List<IAlgorithm> GetRegisteredAlgorithmInstances();
+
+        bool TryUploadCSharClassAlgorithm(string filepath);
     }
 }

@@ -110,21 +110,11 @@
             string filepath = this.fileDialog.GetAlgorithmImplementationFilepath();
             if (!filepath.Equals(string.Empty))
             {
-                var provider = new CSharpCodeProvider();
-                var options = new CompilerParameters
+                if (this.applicationSetup.TryUploadCSharClassAlgorithm(filepath))
                 {
-                    OutputAssembly = $"{Guid.NewGuid().ToString()}.dll"
-                };
-
-                options.ReferencedAssemblies.Add(@"Thinning.Algorithm.dll");
-                options.GenerateInMemory = true;
-                string source = File.ReadAllText($@"{filepath}");
-
-                var x = provider.CompileAssemblyFromSource(options, new[] { source });
-
+                    this.SetTabsForPerformanceCharts();
+                }
             }
-
-            this.SetTabsForPerformanceCharts();
         }
 
         private async Task<TestResult> ExecuteTests()

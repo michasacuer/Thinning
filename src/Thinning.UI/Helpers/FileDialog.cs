@@ -20,6 +20,7 @@
         {
             OpenFileDialog openFile = new OpenFileDialog()
             {
+                Filter = "CSharp class|*.cs",
                 FilterIndex = 1,
             };
 
