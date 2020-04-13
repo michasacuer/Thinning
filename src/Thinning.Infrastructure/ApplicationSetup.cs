@@ -42,14 +42,9 @@
             options.GenerateInMemory = true;
             string source = File.ReadAllText($@"{filepath}");
 
-            var result = provider.CompileAssemblyFromSource(options, new[] { source });
+            var result = provider?.CompileAssemblyFromSource(options, new[] { source });
 
-            if(result.Errors.HasErrors)
-            {
-                return false;
-            }
-
-            return true;
+            return !result.Errors.HasErrors;
         }
 
         private List<TypeInfo> GetAlgorithmClasses()
@@ -57,7 +52,6 @@
             var currentDomain = AppDomain.CurrentDomain;
             var assemblies = currentDomain.GetAssemblies();
 
-            var algorithmAssembly = typeof(IAlgorithm).Assembly;
             var algorithmClasses = new List<TypeInfo>();
             foreach (var assembly in assemblies)
             {
