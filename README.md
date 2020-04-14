@@ -1,6 +1,6 @@
 # Thinning
 
-App that presents how algorithms like KMM, K3M and Zhang-Suen performing in implementation with Parallel.For loops.
+App that presents how algorithms like KMM, K3M and Zhang-Suen performing in implementation with Parallel.For loops!
 
 # Used tools
 - WPF
