@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.Drawing.Imaging;
+    using System.Linq;
     using System.Runtime.InteropServices;
     using System.Threading;
     using Thinning.Algorithm.Interfaces;
@@ -82,8 +83,7 @@
                         return null;
                     }
 
-                    double executionTime;
-                    testSamples[sample] = algorithm.Execute(testSamples[sample], stride, bitmap.Height, bitmap.Width, out executionTime);
+                    testSamples[sample] = algorithm.Execute(testSamples[sample], stride, bitmap.Height, bitmap.Width, out double executionTime);
                     resultTimes[algorithmCount].Add(executionTime);
 
                     sample++;
@@ -101,14 +101,9 @@
 
         public TestResult ByteArraysToBitmapResults(TestResult resultTimes, int iterations, byte[][] researchSamples, Bitmap bitmap)
         {
-            var resultBitmaps = new List<Bitmap>();
-            foreach (var timesList in resultTimes.ResultTimes)
-            {
-                resultBitmaps.Add(new Bitmap(bitmap.Width, bitmap.Height));
-            }
+            var resultBitmaps = resultTimes.ResultTimes.Select(timesList => new Bitmap(bitmap.Width, bitmap.Height)).ToList();
 
-            var sample = 0;
-
+            int sample = 0;
             foreach (var bmp in resultBitmaps)
             {
                 var bitmapData = bmp.LockBits(

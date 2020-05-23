@@ -17,11 +17,13 @@
 
         public string GetHardwareInfo()
         {
-            var hardwareInfoList = new List<string>();
-            hardwareInfoList.Add("OS: " + this.systemInfo.GetOperativeSystemInfo());
-            hardwareInfoList.Add("CPU: " + this.systemInfo.GetCpuInfo());
-            hardwareInfoList.Add("GPU: " + this.systemInfo.GetGpuInfo());
-            hardwareInfoList.Add("MEMORY: " + this.systemInfo.GetTotalMemory());
+            var hardwareInfoList = new List<string>
+            {
+                "OS: " + this.systemInfo.GetOperativeSystemInfo(),
+                "CPU: " + this.systemInfo.GetCpuInfo(),
+                "GPU: " + this.systemInfo.GetGpuInfo(),
+                "MEMORY: " + this.systemInfo.GetTotalMemory()
+            };
 
             var sb = new StringBuilder();
             foreach (string info in hardwareInfoList)

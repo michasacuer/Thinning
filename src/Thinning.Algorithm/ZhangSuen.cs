@@ -15,7 +15,6 @@
             bool deletion = true;
 
             var temp = new byte[pixels.Length];
-            var result = new byte[pixels.Length];
 
             Buffer.BlockCopy(pixels, 0, temp, 0, pixels.Length);
 

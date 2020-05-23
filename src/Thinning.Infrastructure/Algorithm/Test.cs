@@ -22,10 +22,8 @@
             IProgress<int> progress,
             CancellationToken cancellationToken)
         {
-            int stride;
-
             var bitmap = this.worker.PrepareBitmapToTestRun(new Bitmap(imageFilepath));
-            var testSamples = this.worker.PrepareTestSamples(bitmap, iterations, algorthmsCount, out stride);
+            var testSamples = this.worker.PrepareTestSamples(bitmap, iterations, algorthmsCount, out int stride);
             var timesTestResult = this.worker.RunAllAlgorithmsTestInterations(
                     bitmap, stride, testSamples, iterations, progress, cancellationToken);
 
@@ -35,10 +33,8 @@
 
                 return testResult;
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
     }
 }
