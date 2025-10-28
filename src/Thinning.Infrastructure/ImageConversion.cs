@@ -5,12 +5,80 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Windows.Media.Imaging;
-    using Accord.Imaging.Filters;
     using Thinning.Infrastructure.Interfaces;
 
     public class ImageConversion : IImageConversion
     {
-        public Bitmap Create8bppGreyscaleImage(Bitmap bitmap) => Grayscale.CommonAlgorithms.BT709.Apply(bitmap);
+        public Bitmap Create8bppGreyscaleImage(Bitmap bitmap)
+        {
+            // First ensure source is in a format we can work with
+            Bitmap sourceBmp = bitmap;
+            if (bitmap.PixelFormat != PixelFormat.Format24bppRgb && 
+                bitmap.PixelFormat != PixelFormat.Format32bppArgb)
+            {
+                sourceBmp = new Bitmap(bitmap.Width, bitmap.Height, PixelFormat.Format32bppArgb);
+                using (Graphics g = Graphics.FromImage(sourceBmp))
+                {
+                    g.DrawImage(bitmap, 0, 0);
+                }
+            }
+
+            // BT709 formula: Y = 0.2126 * R + 0.7152 * G + 0.0722 * B
+            Bitmap grayBitmap = new Bitmap(sourceBmp.Width, sourceBmp.Height, PixelFormat.Format8bppIndexed);
+            
+            // Set grayscale palette
+            ColorPalette palette = grayBitmap.Palette;
+            for (int i = 0; i < 256; i++)
+            {
+                palette.Entries[i] = Color.FromArgb(i, i, i);
+            }
+            grayBitmap.Palette = palette;
+
+            BitmapData srcData = sourceBmp.LockBits(
+                new Rectangle(0, 0, sourceBmp.Width, sourceBmp.Height),
+                ImageLockMode.ReadOnly,
+                sourceBmp.PixelFormat);
+
+            BitmapData dstData = grayBitmap.LockBits(
+                new Rectangle(0, 0, grayBitmap.Width, grayBitmap.Height),
+                ImageLockMode.WriteOnly,
+                PixelFormat.Format8bppIndexed);
+
+            int bytesPerPixel = Image.GetPixelFormatSize(sourceBmp.PixelFormat) / 8;
+
+            unsafe
+            {
+                byte* src = (byte*)srcData.Scan0;
+                byte* dst = (byte*)dstData.Scan0;
+
+                for (int y = 0; y < sourceBmp.Height; y++)
+                {
+                    byte* srcRow = src + (y * srcData.Stride);
+                    byte* dstRow = dst + (y * dstData.Stride);
+
+                    for (int x = 0; x < sourceBmp.Width; x++)
+                    {
+                        // BGR(A) format
+                        byte b = srcRow[x * bytesPerPixel];
+                        byte g = srcRow[x * bytesPerPixel + 1];
+                        byte r = srcRow[x * bytesPerPixel + 2];
+
+                        // BT709 conversion
+                        dstRow[x] = (byte)(0.2126 * r + 0.7152 * g + 0.0722 * b);
+                    }
+                }
+            }
+
+            sourceBmp.UnlockBits(srcData);
+            grayBitmap.UnlockBits(dstData);
+
+            if (sourceBmp != bitmap)
+            {
+                sourceBmp.Dispose();
+            }
+
+            return grayBitmap;
+        }
 
         public Bitmap CreateNonIndexedImage(Bitmap bitmap)
         {
