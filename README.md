@@ -4,7 +4,7 @@ App that presents how algorithms like KMM, K3M and Zhang-Suen performing in impl
 
 # Used tools
 - WPF
-- .NET Framework 4.7.2 with C# 7.3
+- .NET 8 with C# 12
 - [Caliburn.Micro](https://caliburnmicro.com/)
 - [Material Design in XAML](http://materialdesigninxaml.net/)
 - [LiveCharts](https://lvcharts.net/)
