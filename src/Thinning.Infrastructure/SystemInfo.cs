@@ -1,7 +1,6 @@
 ﻿namespace Thinning.Infrastructure
 {
     using System.Management;
-    using Microsoft.VisualBasic.Devices;
     using Thinning.Infrastructure.Interfaces;
 
     public class SystemInfo : ISystemInfo
@@ -52,9 +51,16 @@
 
         public string GetTotalMemory()
         {
-            var computerInfo = new ComputerInfo();
-            ulong memory = ulong.Parse(computerInfo.TotalPhysicalMemory.ToString());
-            return ((memory / (1024 * 1024)) + " MB").ToString();
+            var searcher = new ManagementObjectSearcher("Select * From Win32_ComputerSystem");
+            var searcherList = searcher.Get();
+
+            foreach (ManagementObject item in searcherList)
+            {
+                ulong memory = ulong.Parse(item["TotalPhysicalMemory"].ToString());
+                return ((memory / (1024 * 1024)) + " MB").ToString();
+            }
+
+            return "Unknown";
         }
     }
 }

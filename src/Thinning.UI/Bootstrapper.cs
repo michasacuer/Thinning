@@ -16,9 +16,9 @@
             this.Initialize();
         }
 
-        protected override void OnStartup(object sender, StartupEventArgs e)
+        protected override async void OnStartup(object sender, StartupEventArgs e)
         {
-            this.DisplayRootViewFor<MainWindowViewModel>();
+            await DisplayRootViewForAsync<MainWindowViewModel>();
         }
 
         protected override void Configure()
